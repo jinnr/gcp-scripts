@@ -1,0 +1,594 @@
+// GPC Online Library
+// cod_black_ops_4_-_jitter_xs_edition_-_sg12_super_jitter_with_strong_recoil_control_adjustable_on.gpc
+
+/*
+ 
+Credits: Ikillpeople4fun aka My_Eggplant_got_her, XxYOU_DERPxX Aka DerpHasModz and XxPoLiGoNeRaxX
+
+************************************************************************************                 
+						    XXPOLIGONERAXX V5				
+		 		 __                     __   ___     __       ___     
+		        /  `  /\  |    |       /  \ |__     |  \ |  |  |  \ / 
+		        \__, /~~\ |___ |___    \__/ |       |__/ \__/  |   |                                             
+		         __             __           __   __   __             
+		        |__) |     /\  /  ` |__/    /  \ |__) /__`    | \  /  
+		        |__) |___ /~~\ \__, |  \    \__/ |    .__/    |  \/          
+			                _   _ ___ ___ ___          ___ ___ ___ _  _  
+			 | | |\ |      |_) |_  |   |   |         |  |   |   | |_ |_) 
+			 |_| | \|      |   |_  |  _|_  |       \_| _|_  |   | |_ | \ 
+                                                     
+										  
+                
+************************************************************************************* 
+
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+| | | | |I|N|S|T|R|U|C|T|I|O|N|S| | | | | | | | | | | | | | | | | | | | | | | | | | | |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ ---------------------------------------------------------------------------------------- 
+  							   _    ,---------------------------.
+                             __))   | TOGGLES ON/OFF & SWITCHES |
+                            ( oo)   _)--------------------------'
+------------------------ooO--(_)--Ooo----------------------------------------------------
+	
+	HOLD AIM (XB1_LT/PS4_L2) +
+		
+		1. TAP D-PAD DOWN 	= ALL FIRE MODS OFF (BLUE)	
+		2. TAP D-PAD RIGHT 	= RAPID FIRE ON (WHITE)
+		3. TAP D-PAD LEFT 	= JITTER IS ON (SG12) (SKYBLUE) 			
+		
+	AIM ASSIST IS ON BY DEFAULT	
+	
+	LEDS:
+	
+	BLUE		 	ALL FIRE MODS OFF 
+	WHITE		 	RAPID FIRE ON
+	SKYBLUE		 	JITTER IS ON
+	PINK		 	JITTER + RAPID FIRE ON
+	RED	BLINKING 	FIRE MODS (JITTER/RAPID FIRE) ARE ON STAND BY (SO YOU CAN OPERATE 
+					YOUR KILL STREAK AND SPECIAL POWER LIKE WAR MACHINE
+		
+----------------------------------------------------------------------------------------- 
+                 ,---------------------------.                                     
+                |      JITTER INSTRUCTIONS! | `  @__                              
+                `--------------------------(_-  (.. )                             
+------------------------------------------- ooO--(_)--Ooo--------------------------------	
+	JITTER SG12
+		- BASED ON THE JITTER FROM YOUDERP - BUT REBUIILD & PERFECTED BY XXPOLIGONERAXX AND IKILLPEOPLE4FUN
+		- ACTIVATE SPRINT CANCELS RELOAD IN THE GAME MENU
+		- USE GUN HO!!
+		- HOLD ADS TAP HOLD D-PAD LEFT TO SWITCH ON.
+		- HOLD ADS TAP HOLD D-PAD DOWN TO SWITCH OFF.
+		- JITTER FIRE WILL ONLY OCCUR WHEN HIP FIRED
+		
+	 TIP: ONCE JITTER IS ACTIVATED YOU CAN ADD RAPID FIRE TO THE MIX (HOLD ADS + TAP RIGHT)
+	 	  RAPID FIRE WILL ONLY OCCUR WHEN ADS & FIRE ARE PRESSED AT THE SAME TIME
+---------------------------------------------------------------------------------------- 
+ 
+ANTI RECOIL ON THE FLY:
+ 
+START VALUE: 
+ - VERTICAL/Y = 45
+
+HOLD CIRCLE/B + HOLD TACTICAL +
+ 
+ - TAP UP = +1
+ - TAP DOWN = -1
+ - TAP RIGHT = +10
+ - TAP LEFT = -10
+
+THE NEW VALUE WILL BE AUTO SAVED TO EPROM. 
+IF YOU EXCEED THE ANTI RECOIL RANGE THE LED COLOR WILL BE RED --> RESET EPROM (SEE BELOW)!
+
+IMPORTANT: THE FIRST TIME YOU RUN THE SCRIPT YOU PROBABLY NEED TO RESET WHATEVER VALUE
+THERE IS ALREADY STORED IN EPROM (BECAUSE THE ON THE FLY VALUE WILL BE PULLED FROM EPROM)
+SO IF YOU EXPERIENCE ISSUES WITH THE ANTI RECOIL OR YOUR LED COLOR IS RED: RESET EPROM.
+
+RESET EPROM:
+- HOLD ADS + HOLD SHARE/VIEW BTN FOR MORE THAN 6 SEC (UNTIL IT RUMBLES).
+ 
+ ---------------------------------------------------------------------------------------- 
+     
+If you are using Jitter/Rapid Fire and you need to activate a Killstreak or Special Power that 
+requires fire mods to be switched off, tap the "kill streak switch" or the "special power switch." 
+This will deactivate the fire mods for 30 seconds.
+
+After 30 second the fire mods will come back on. If you die and respawn within 30 seconds, simple
+hold reload for more than 200ms to reset the script (fire mods will come back on). If you want 
+this switched off: set STOP_F_MOD to FALSE. You can also toggle this on/off on the fly:
+
+TOGGLE ON/OFF: 
+- HOLD ADS + HOLD D-PAD DOWN + TAP OPTIONS/MENU
+ 
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+| | | | |U|S|E|R| |C|O|N|F|I|G|U|R|A|T|I|O|N| | | | | | | | | | | | | | | | | | | | | |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+       
+//---------------------------/ START USER CONFIG---------------------------------------*/
+
+define EASY__MELEE=TRUE; 				// MELEE SUPER FAST WITH LEFT STICK CLICK (TACTICAL BTN LAYOUT) 
+define EASY__RUN=TRUE;					// AUTO SPRINT 
+define TURBO__TRIGGERS=TRUE;        	// HAIR TRIGGERS ON BY DEFAULT FOR BOTH TRIGGERS
+define EASY__SLIDE_DROP=TRUE;    		// TAP CROUCH/PRONE BTN TO PRONE/EASY SLIDE
+define AIM__CORRECT=TRUE;       		// AIM CORRECTIONS
+define FIRE_AND_HEAL=TRUE; 				// AUTO HEAL AFTER FIRING YOUR WEAPON       
+define SUPER__POWER__SW=13;				// D-PAD UP ACTIVATES SPECIAL POWER, 26 = OFF 
+define KILL__STREAK__SW=15;				// D-PAD LEFT ACTIVATES KILL STEAK, 26 = OFF
+int    STOP_F_MOD=TRUE; 				// LED IS BLINKING RED WHEN KS IS ACTIVATED
+
+/*
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+| | | | |C|O|N|T|R|O|L|S| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+
+----TACTICAL BTN LAY OUT BY DEFAULT------
+*/
+define AIM__INVERTED=FALSE;
+define HOME=0;            	//PS4_PS 		/ XB1_XBOX
+define VIEW_reset=1;    	//PS4_SHARE 	/ XB1_VIEW
+define MENU_save=2;        	//PS4_OPTIONS 	/ XB1_MENU
+define LETHAL=3;        	//PS4_R1 		/ XB1_RB
+define FIRE=4;            	//PS4_R2 		/ XB1_RT
+define PRONE=5;            	//PS4_R3 		/ XB1_RS
+define TACTICAL=6;        	//PS4_L1 		/ XB1_LB
+define ADS=7;            	//PS4_L2 		/ XB1_LT
+define SPRINT=8;        	//PS4_L3 		/ XB1_LS 
+define RX=9;            	//PS4_RX 		/ XB1_RX
+define RY=10;            	//PS4_RY 		/ XB1_RY
+define LX=11;            	//PS4_LX 		/ XB1_LX
+define LY=12;            	//PS4_LY 		/ XB1_LY
+define UP=13;            	//PS4_UP 		/ XB1_UP
+define DOWN=14;           	//PS4_DOWN 		/ XB1_DOWN
+define LEFT=15;            	//PS4_LEFT 		/ XB1_LEFT
+define RIGHT=16;        	//PS4_RIGHT 	/ XB1_RIGHT
+define SW_WEAPON=17;    	//PS4_TRIANGLE 	/ XB1_Y
+define MELEE=18;        	//PS4_CIRCLE 	/ XB1_B
+define JUMP=19;            	//PS4_CROSS 	/ XB1_A
+define RELOAD=20;        	//PS4_SQUARE 	/ XB1_X
+define GYROZ_PL1=26;    	//PS4_GYROZ 	/ XB1_PL1
+
+
+/*---------------------------/ END USER CONFIG-----------------------------------------
+
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+| | | | |L|E|D|S| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | 
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/
+    define Off      = 0;
+    define Green    = 1;
+    define Blue     = 2;                                                           
+    define Pink     = 3;
+    define Red      = 4;                                                           
+    define SkyBlue  = 5;
+    define Yellow   = 6;
+    define White    = 7;
+/*
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+| | | | |D|A|T|A| | | | | | | | | | | | | | | | | | | | | | || | | | | | || | | | | | |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/
+data(
+    0,0,0,0,     // Off 
+    0,0,2,0,     // Green                                                             
+    2,0,0,0,     // Blue                                                               
+    0,0,0,2,     // Pink                                                               
+    0,2,0,0,     // Red                                                                
+    2,0,2,0,     // SkyBlue                                                            
+    0,2,2,0,     // Yellow
+    2,2,2,2      // White  
+);
+
+/*
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ | | | | | | | | |V|A|R|I|A|B|L|E|S| | | | | | | | | | | | | | | | | | | | | | | | | | |
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/ 
+int    G__M=TRUE; 
+int    hold_time=35;
+int    rest_time=35;
+int    RF_KS=FALSE;
+int    J__R=FALSE;
+int    rumble;
+int    Fire_KS=FALSE;
+int    fire__mods_ON=TRUE;
+int    ADS_SENS=95, GEN_SENS=100, HIP_SENS=100, ADS_FIRE_SENS=90, Use_sens; 
+int    recoil__y, recoil__x;
+int    easy_run_KS=FALSE;
+int    NO__RECOIL__Y;  
+int    NO__RECOIL__X;
+
+init {
+ 
+
+//--ANTI RECOIL /--------------------------------------
+
+    NO__RECOIL__Y = get_pvar(SPVAR_1,-100,100, 45);            
+    NO__RECOIL__X = get_pvar(SPVAR_2,-100,100, 0);
+
+}
+/*
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ | | | | | | | | |M|A|I|N| |B|L|O|C|K| |S|T|A|R|T|S| |H|E|R|E| | | | | | | | | | | | | |
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/
+main {
+ 
+set_val (TRACE_1, NO__RECOIL__Y); 
+/*
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+| | | |M|E|N|U| |A|D|S| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/
+if(get_val(ADS))
+	{//hold ADS button
+    	 if (get_val(1) && get_ptime(1)> 600)
+    			{ 
+      			RESET_Defaults();			
+				}
+		set_val(1,0);
+//--FIRE MODS OFF 
+    if(event_press(DOWN))
+    			{//D-pad DOWN
+			        RF_KS=FALSE;   
+			        rumble(RF_KS);
+			        Fire_KS=FALSE;
+			        J__R=FALSE;
+				}
+//--RAPID FIRE ON
+    if(event_press(RIGHT))
+    			{//D-pad RIGHT
+			        RF_KS=TRUE;           
+			        rumble (RF_KS);
+			        Fire_KS=TRUE;
+				}
+//-JITTER ON
+	if(event_press(LEFT))
+				{//D-pad LEFT
+					 J__R = TRUE;
+					 Fire_KS=TRUE;
+			         rumble(J__R); 
+			    }	 
+	if(get_val (DOWN) && event_press (2))
+					{ 
+						STOP_F_MOD = !STOP_F_MOD;				
+						rumble (!STOP_F_MOD);
+					}
+						set_val (2,0);
+}
+
+/*
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ | | | | | | | | |T|O|G|G|L|E|S| | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/
+
+//--HOLD CIRCLE / B			
+if (get_val(MELEE))
+		{ //--HOLD L1/LB
+		if (get_val (TACTICAL))//-- + TAP...
+			{//--DPAD UP VERTICAL_RECOIL + 1  
+			if (event_press(UP)){ NO__RECOIL__Y = NO__RECOIL__Y + 1; combo_run(notify);
+									}//--DAPD DOWN VERTICAL_RECOIL -1      
+    			if (event_press(DOWN)){NO__RECOIL__Y = NO__RECOIL__Y - 1; combo_run(notify);
+    									} //--DPAP LEFT VERTICAL_RECOIL - 10 
+    				if (event_press(LEFT)){ NO__RECOIL__Y = NO__RECOIL__Y - 10; combo_run(notify);
+    										} //--DPAP RIGHT VERTICAL_RECOIL + 10       
+    					if (event_press(RIGHT)){NO__RECOIL__Y = NO__RECOIL__Y + 10; combo_run(notify);
+    											}
+   											 }//--END HOLD L1/LB
+   						if (event_release(TACTICAL))
+   							save_pvars(); 
+   		
+  		
+		}//--END HOLD CIRCLE /B
+/*
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ | | | | | | | | |K|I|L|L| |S|W|I|T|C|H| |F|I|R|E| |M|O|D|S| | | | | | | | | | | | | | |
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/ 
+if 	(!STOP_F_MOD) 
+	{ 
+		combo_run (STOP_FIRE_KS);
+	}
+/*
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ | | | | | | | | |E|A|S|Y| |S|L|I|D|E| | | | | | | | | | | | | | | | | | | | | | | | | |
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/ 
+if(EASY__SLIDE_DROP)
+	{//--START EASY SLIDE
+		if (get_val(PRONE))
+			{ //--HOLD CIRCLE / B
+        		combo_run(DROP_SHOT);
+        	} //--end HOLD CIRCLE / B
+        	
+        if (combo_running (DROP_SHOT) && get_val (FIRE))
+        	{//--combo running + FIRE
+        		combo_run(slide_fix);
+        	}//--end combo running  + FIRE  
+         else {combo_stop(slide_fix);
+    }//--END EASY SLIDE
+	
+/*
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ | | | | | | | | |T|U|R|B|O| |B|T|N| |A|.|K|.| |H|A|I|R| |T|R|I|G|G|E|R|S| | | | | | | |
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/  
+turbo(FIRE);
+turbo(ADS); 
+/*
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ | | | | | | | | |A|I|M| | |C|O|R|R|E|C|T|I|O|N|S| | | | | | | | | | | | | | | | | | | |
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/  
+if(AIM__CORRECT)
+	{ 
+	  if(get_val(FIRE) && get_val(ADS)) 
+	  { 
+	    Use_sens = ADS_FIRE_SENS;
+	  }
+	  if(get_val(FIRE) && !get_val(ADS)) 
+	  { 
+	    Use_sens = HIP_SENS;
+	  }
+	  if(!get_val(FIRE) && !get_val(ADS)) 
+	  {
+	    Use_sens = GEN_SENS;
+	  }
+	  if(!get_val(FIRE) && get_val(ADS)) 
+	  {
+	    Use_sens = ADS_SENS;
+	  } 
+	    sensitivity(9, NOT_USE, Use_sens);
+	    sensitivity(10, NOT_USE, Use_sens);
+	}
+/*
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ | | | | | | | | |A|U|T|O| |H|E|A|L| | | | | | | | | | | | | | | | | | | | | | | | | | |
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/ 
+ if (FIRE_AND_HEAL)
+ 	{
+ 		if (event_release (FIRE)) combo_run (Fire_and_Heal);
+ 	} 
+ /*
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ | | | | | | | | |E|A|S|Y| |R|U|N| | | | | | | | | | | | | | | | | | | | | | | | | | | |
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/
+if (EASY__RUN)
+	{
+	if (!easy_run_KS && get_val(LY) < -25 && !get_val(ADS)) 
+		{
+ 			combo_run (EASY_RUN);
+ 		}
+	}
+/*
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ | | | | | | | | |E|A|S|Y| |M|E|L|E|E| | | | | | | | | | | | | | | | | | | | | | | | | |
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/
+if (EASY__MELEE)
+	{
+  	if (get_val(SPRINT)) set_val(MELEE, 100);
+  	} 
+/*
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ | | | | | | | | |R|A|P|I|D| |F|I|R|E| |&| |J|I|T|T|E|R| | | | | | | | | | | | | | | | |
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+//-- RF PRIMARY  */ 
+if (fire__mods_ON && RF_KS && get_val(ADS) && get_val(FIRE))combo_run (RAPID_FIRE); 
+
+if (J__R)
+	{//--START  J__R
+		if (get_val(FIRE) &&!get_val(ADS))
+				{//--HOLD FIRE
+					if (fire__mods_ON) combo_run(Jitter1); combo_stop (EASY_RUN);
+				} //--END FIRE
+	}//J__R
+		if(event_release(FIRE))
+				{//--RELEASE FIRE	
+							combo_stop(Jitter1); combo_run (EASY_RUN);
+				}//--END RELEASE FIRE
+	}//--END J__R
+  
+  	
+/*
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ | | | | | | | | |R|E|S|E|T| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/  
+if(event_release(RELOAD))
+	{
+		if (get_ptime(RELOAD)> 200 && combo_running (NO__FIRE_MOD))
+			{ 
+				fire__mods_ON=TRUE; combo_stop (NO__FIRE_MOD); rumble (!fire__mods_ON); reset_leds ();
+			} 
+		if (get_ptime(RELOAD)< 200)
+			{ 
+ 				 combo_run (STOP_SPRINT);
+ 			}		 
+ 	} 
+/*
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ | | | | | | | | |A|N|T|I| |R|E|C|O|I|L| | | | | | | | | | | | | | | | | | | | | | | | |
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/  
+ No__recoil(NO__RECOIL__X, NO__RECOIL__Y); 
+/*
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ | | | | | | | | |A|I|M| |A|S|S|I|S|T| | | | | | | | | | | | | | | | | | | | | | | | | |
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/
+if(get_val(ADS)) combo_run(AA_XY);  else combo_stop(AA_XY); 
+/*
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+| | | | |K|I|L|L| |S|W|I|T|C|H| |&| |S|U|P|E|R| |P|W| |S|W|I|T|C|H| | | | | | | | | | |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/
+if (!get_val(18))
+	{
+	if(event_press (SUPER__POWER__SW) && !get_val (ADS) && get_ptime(SUPER__POWER__SW)< 15 && G__M) 
+		{ 
+			combo_run(SPECIAL);
+		}
+	if(event_press (KILL__STREAK__SW) &&  !get_val (ADS) && get_ptime(KILL__STREAK__SW)< 15 && G__M) 
+		{ 
+			combo_run(KILL);
+		}
+	}
+/*
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ | | | | | | | | |L|E|D|S|&|R|U|M|B|L|E| | | | | | | | | | | | | | | | | | | | | | | | |
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/
+if(rumble) combo_run(RUMBLE);
+combo_run (leds);
+
+}//--END OF MAIN
+/*
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ | | | | | | | | |C|O|M|B|O| |S|E|C|T|I|O|N| | | | | | | | | | | | | | | | | | | | | | |
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/
+combo AA_XY {
+	set_val(10,xy_val(10, 24));
+	wait(20);
+	set_val(9,xy_val(9, 24));
+	set_val(11,xy_val(11, 24));
+	wait(20);
+	set_val(10,xy_val(10, 24 * -1));
+	wait(20);
+	set_val(9,xy_val(9, 24 * -1));
+	set_val(11,xy_val(11, 24 * -1));
+	wait(20);
+}
+combo leds{
+	color_led (Blue);  
+	if (J__R ) color_led (SkyBlue);
+	if (RF_KS) color_led (White);
+	if (RF_KS && J__R)color_led (Pink);
+	if (NO__RECOIL__Y < 1)color_led (Red);
+	if (NO__RECOIL__Y > 100)color_led (Red);
+}
+combo Jitter1 {	
+	set_val(12,100);
+	set_val(20,100);
+	set_val(12,0);
+	wait(31);
+	set_val(8,90);
+	set_val(12,-98);
+	set_val(15,90);
+	set_val(3,0);
+	wait(11);
+	set_val(12,1);
+	set_val(12,-1);
+	wait(13);
+	wait(10);
+} 
+combo STOP_SPRINT {     
+	easy_run_KS = TRUE;  
+	wait(2200);
+	easy_run_KS = FALSE; 
+}
+combo Fire_and_Heal {     
+    set_val(TACTICAL,100);
+    wait(40); 
+}
+combo RUMBLE{
+    set_rumble(RUMBLE_B,100);
+    wait(250);
+    reset_rumble();
+    wait(150);
+    rumble--;
+}
+combo notify {
+    set_rumble(RUMBLE_B,100);
+    wait(80);
+    reset_rumble();
+    wait (50):
+    combo_stop(notify);
+}
+combo EASY_RUN {                  
+    set_val(SPRINT,100);       
+    wait(30);                     
+    wait(100);      
+}  
+combo RAPID_FIRE { 
+    set_val(FIRE,100);
+    wait(hold_time); 
+    set_val(FIRE,  0); 
+    wait(rest_time);
+} 
+combo STOP_FIRE_KS {
+	Fire_KS=FALSE;
+}
+combo SPECIAL {
+	set_val(LETHAL,100);  
+	set_val(TACTICAL,100);	
+	wait(100);
+	if (Fire_KS==TRUE)
+	combo_run (NO__FIRE_MOD);
+	wait(40);
+} 
+combo KILL {
+if (Fire_KS==TRUE)
+	combo_run (NO__FIRE_MOD);
+	wait (40);
+	set_val (SW_WEAPON, 100);
+	wait(400);
+	set_val (SW_WEAPON,0);
+	wait(40);
+	reset_leds ();
+}
+combo NO__FIRE_MOD {
+	color_led (Red);
+     fire__mods_ON=FALSE;
+     combo_run (BLINK_AR);
+     wait (30000);
+     fire__mods_ON=TRUE;
+     combo_stop (BLINK_AR);
+}
+combo BLINK_AR {
+    wait(400);
+    set_rumble(RUMBLE_B, 30);    
+    color_led(Off);
+    wait(100);
+    reset_leds ();
+    reset_rumble ();
+}
+combo DROP_SHOT{
+ set_val(12,-100); set_val(PRONE,100); 
+ 	wait(160);
+	wait(840);  
+}
+combo slide_fix{ 
+set_val(18,100);wait(30);wait(4000);
+}
+function turbo(btn) {
+    if (!TURBO__TRIGGERS || !get_val(btn)) return; 
+    set_val(btn, 100);
+}
+function No__recoil(No__recoil__x, No__recoil__y) {
+    if (get_val(FIRE) && combo_running (Jitter1)) {
+    if (isqrt(pow(get_val(RX), 2) + pow(get_val(RY), 2)) <= abs(No__recoil__y)) {   
+        if (abs(get_val(RY)) <= abs(No__recoil__y)) {
+            recoil__x = (get_val(RX) + (No__recoil__x*(100-abs(get_val(RX))))/100);
+            set_val(RX, recoil__x);           
+            if (AIM__INVERTED)
+                recoil__y = (get_val(RY) - (No__recoil__y*(100-abs(get_val(RY))))/100); // Y-axis invert
+            else
+                recoil__y = (get_val(RY) + (No__recoil__y*(100-abs(get_val(RY))))/100);
+            if (recoil__y > No__recoil__y) recoil__y = No__recoil__y;
+            set_val(RY, recoil__y);              
+ 			}
+	 	}
+ 	}
+ }
+ function xy_val(f_axis,f_val) {
+	if(abs(get_val(f_axis)) < 25)
+	return f_val;
+	return get_val(f_axis);
+}
+ //--1 = off, 2 = on
+function rumble(f_bln) {
+    if(f_bln)
+        rumble = 2;
+    else
+        rumble = 1;
+} 
+function RESET_Defaults () {
+    NO__RECOIL__Y =  45;            
+    save_pvars();
+    }
+function save_pvars (){
+    set_pvar(SPVAR_1 , NO__RECOIL__Y) 
+    rumble (!1);
+    }
+function color_led(colour) {
+    set_led(LED_1, dbyte(colour * 4));
+    set_led(LED_2, dbyte((colour * 4) + 1));
+    set_led(LED_3, dbyte((colour * 4) + 2));
+    set_led(LED_4, dbyte((colour * 4) + 3));
+}

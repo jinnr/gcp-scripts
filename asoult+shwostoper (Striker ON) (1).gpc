@@ -1,0 +1,784 @@
+/* *
+* GPC SCRIPT
+*
+*  GPC is a scripting language with C-like syntax.
+*  To learn more access GPC Language Reference on Help menu.
+* *********************************************************** */
+
+main {
+
+    //
+    // The main procedure is called before every report is sent to
+    // console. You can think of this procedure as a loop which only
+    // ends when the script is unloaded.
+    //
+    // TODO: handle/change values of buttons, analog stick and/or sensors
+    //
+
+}// include <titanone.gph>
+ 
+//    COLOR INDICATION:
+//    GREEN = Primary weapon
+//    RED = Secondary weapon
+ 
+ 
+//    /  /  /   _ _ _ ____ ____ _  _ _ _  _ ____      /  /  /
+//   /  /  /    | | | |__| |__/ |\ | | |\ | | __     /  /  / 
+//  .  .  .     |_|_| |  | |  \ | \| | | \| |__]    .  .  .  
+//-----------------------------------------------------------
+// It's up to you to change the TRUE / FALSE values in the "script settings" to set it for your way of playing.
+ 
+// Script acts on the keys of your controller, not on the game.
+// Script does not know what weapon you have in hand, you have to be careful that your weapon and the assigned color go together,
+// otherwise there is the option "panic button" in the settings.
+ 
+// Choose your primary and secondary weapons with TRUE / FALSE and go down set all the other options of the script.
+// For example, put all primary weapons on FALSE, so that you can play with any weapon normally,
+// without any assistance on that weapon while your secondary weapon has the pop shot you want with your SASG.
+ 
+// If you activate Strafe and you spam PS4 Square or Xbox X in the inventory or in the PS4 / Xbox menu,
+// you may activate the Strafe combo in the game or in your menu!
+ 
+// AntiRecoil has been adjusted with the In Game sensitivity options shown below.
+// If you have not the same settings In Game, your weapon may shoot to the sky or to the ground.
+// It will be necessary to adjust the recoils value.
+ 
+// Exemple for primary weapon:
+// In "main section", find "PRIMARY WEAPON", then find the part of the weapon you are using
+// If you play WITH Striker mode, change the [type of weapon]_Recoil_[number] values inside Recoil WITH Striker mode
+// If you play WITHOUT Striker mode, change the [type of weapon]_Recoil_[number] values inside Recoil WITHOUT Striker mode 
+// For MDR and Shotgun, change the ANTI_RECOIL value inside  Recoil WITH (or WITHOUT) Striker mode.
+ 
+// If your weapon shoot to the ground, discrease values.
+// If your weapon shoot to the sky, increase values.
+ 
+// Now enjoy
+ 
+ 
+//                                    In Game settings:
+ 
+// 100% Camera Sensitivity
+ 
+// 90% Aim Sensitivity
+ 
+// 90% Scope Sensitivity
+ 
+// 0% Analog Dead Zone Size
+ 
+// 0% Stability (no stability on your gear and weapon mods)
+ 
+// Press to sprint = OFF (recommended if AutoRun and Strafe are TRUE)
+ 
+// Invert Y Axis = Always OFF
+//                 If you play with inverted axis, go down in the settings of the script and set Axis_inverted = TRUE 
+//                 In game option "Invert Y axis" MUST BE OFF!
+ 
+//______________________________________________________________________________________________________________________//
+//___________________________________________________OPTIONS START______________________________________________________//
+//______________________________________________________________________________________________________________________//
+//  ____ _  _ ____ ____ ____ ____    _   _ ____ _  _ ____    ____ ___  ___ _ ____ _  _ ____ 
+//  |    |__| |  | |  | [__  |___     \_/  |  | |  | |__/    |  | |__]  |  | |  | |\ | [__  
+//  |___ |  | |__| |__| ___] |___      |   |__| |__| |  \    |__| |     |  | |__| | \| ___]   
+//----------------------------------------------------------------------------------------------------------------------//
+//                                    PRIMARY WEAPON (or green light):
+ data(1,
+  2,0,0,0, //1. Blue
+  0,2,0,0, //2. Red
+  0,0,2,0, //3. Lime/Green
+  0,0,0,2, //4. Fuchsia/Pink
+  2,0,2,0, //5. SkyBlue
+  0,2,2,0, //6. Yellow
+  2,2,2,2  //7. White
+);
+ 
+//        Choose your primary weapon, only one value can be TRUE! (If no values are TRUE, you can play with any weapon)
+ 
+//    Assault Rifle
+int LW_M4_onoff         = TRUE;
+int BullFrog_onoff      = FALSE;
+int MDR_onoff           = FALSE;
+int WarlordAK_onoff     = FALSE;
+ 
+//----------------------------------------------------------------------------------------------------------------------//
+//                                    SECONDARY WEAPON (or red light):
+ 
+//        Choose your secondary weapon, only one value can be TRUE! (If no values are TRUE, you can play with any weapon)
+ 
+//    SHOTGUN
+int SASG_2_onoff        = FALSE;
+int Super90_2_onoff     = FALSE;
+int Showstopper_2_onoff = TRUE;
+int M870_2_onoff        = FALSE;
+ 
+//----------------------------------------------------------------------------------------------------------------------//
+//                                    Shotgun Pop Shot settings:
+ 
+//         If FALSE and FALSE, Pop Shot with ADS + Fire (optimized)
+//         Only one value can be TRUE
+ 
+int PopShot_with_ADS    = TRUE;  // TRUE = Pop Shot with ADS only // Else, set FALSE
+int PopShot_with_FIRE   = FALSE;  // TRUE = Pop Shot with FIRE only // Else, set FALSE
+ 
+//----------------------------------------------------------------------------------------------------------------------//
+//                                    AutoRun setting:
+//        Work better when in game option "Press to Sprint" is turned OFF
+ 
+int AutoRun_onoff = FALSE; // TRUE = AutoTun ON  // FALSE = AutoRun OFF
+ 
+//----------------------------------------------------------------------------------------------------------------------//
+//                                    Parkour setting:
+ 
+//        Double tap PS4 Circle or Xbox B to activate, double tap again to desactivate
+ 
+int Parkour_onoff = FALSE; // TRUE = Parkour ON  // FALSE = Parkour OFF
+ 
+int timelimit     = 175; // Double tap speed (increase to slow double tap speed)
+ 
+//----------------------------------------------------------------------------------------------------------------------//
+//                                    Strafe settings:
+ 
+//        Double tap PS4 Square or Xbox X to Strafe, double tap again to stop Strafe
+//        Work better when in game option "Press to Sprint" is turned OFF
+ 
+int Strafe_onoff    = FALSE; // TRUE = Strafe ON // FALSE = Strafe OFF
+ 
+int Tap_Speed       = 175; // Double tap speed (increase to slow double tap speed)
+int straight_time   = 250; // Time to run straight
+int side_time       = 750; // Time to run to the right/left
+ 
+//----------------------------------------------------------------------------------------------------------------------//
+//                                    Hair Trigger setting:
+ 
+int HairTrigger_onoff = TRUE;  // TRUE = HairTrigger ON // FALSE = HairTrigger
+ 
+//----------------------------------------------------------------------------------------------------------------------//
+//                                    Swap Triggers setting:
+ 
+int R1L1_onoff = FALSE;  // FALSE = shoot and aim with R2/L2 // TRUE = shoot and aim with R1/L1
+ 
+//----------------------------------------------------------------------------------------------------------------------//
+//                                    Inverted Axis setting:
+ 
+//        If you play with inverted axis, set TRUE, in game option "Invert Y axis" MUST BE OFF!
+ 
+int Axis_inverted = FALSE;  // TRUE Right Y axis inverted
+ 
+//----------------------------------------------------------------------------------------------------------------------//
+//                                    AutoMark/Mark Targets setting:
+ 
+int AutoMark_onoff = FALSE;  // FALSE = AutoMark OFF // TRUE = AutoMark ON
+ 
+//----------------------------------------------------------------------------------------------------------------------//
+//                                    Panic Button setting:
+ 
+int PanicBTN_onoff = TRUE;  // Press D-Pad UP to only change device color
+//                                Usefull if you have the wrong color with your current weapon
+ 
+//----------------------------------------------------------------------------------------------------------------------//
+//                                    Classified 6p Striker (30% stability) settings:
+ 
+int Striker_onoff = FALSE;  // TRUE if you run 6 pieces Striker, else FALSE
+ 
+//______________________________________________________________________________________________________________________//
+//___________________________________________________OPTIONS END________________________________________________________//
+//______________________________________________________________________________________________________________________//
+ 
+define Switch_button = 17;
+define FIRE_BTN      = 4;
+define R_Stick       = 5;
+define ADS_BTN       = 7;
+define L_Stick       = 8;
+define R_X           = 9;
+define R_Y           = 10;
+define L_X           = 11;
+define L_Y           = 12;
+define D_UP          = 13;
+define D_DOWN        = 14;
+define Parkour_BTN   = 18; // PS4 Circle / Xbox B
+define Strafe_BTN    = 20; // PS4 Square / Xbox X
+ 
+define Blue      = 1; 
+define Red       = 2; 
+define Green     = 3; 
+define Pink      = 4; 
+define SkyBlue   = 5; 
+define Yellow    = 6; 
+define White     = 7;
+ 
+ 
+int ANTI_RECOIL;        // For AntiRecoil combo
+int ANTI_RECOIL_LEFT;   // For AntiRecoil combo
+int ANTI_RECOIL_RIGHT;  // For AntiRecoil combo
+int AR_Release = 90;    // For AntiRecoil combo
+int anti_recoil;        // For AntiRecoil combo
+int anti_recoil_left;   // For AntiRecoil combo
+int anti_recoil_right;  // For AntiRecoil combo
+int Switch;             // For Switch weapon
+int Col_ind;            // For device color
+int Parkour;            // For Parkour
+int DbleClick = 0;      // For Parkour
+int Dble_Tap = 0;       // For Strafe
+int Loop;               // For Strafe
+int AR_Time_1;          // For Assault Rifle
+int AR_Time_2;          // For Assault Rifle
+int SG_Time1;           // For Shotgun combo
+int SG_Time2;           // For Shotgun combo
+int SG_Time3;           // For Shotgun combo
+//_______________________________________________________________________________________________________________________//
+//  _  _ ____ _ _  _    ____ ___ ____ ____ ___ 
+//  |\/| |__| | |\ |    [__   |  |__| |__/  |  
+//  |  | |  | | | \|    ___]  |  |  | |  \  | 
+ 
+main { // main start
+ 
+    if(event_press(Switch_button)) {Switch=!Switch;}
+//_______________________________________________________________________________________________________________________//
+ 
+//  ____ ___  ___ _ ____ _  _ ____ 
+//  |  | |__]  |  | |  | |\ | [__  
+//  |__| |     |  | |__| | \| ___] 
+ 
+ 
+  //Swap Triggers
+    if(R1L1_onoff) {
+        swap(3, 4); swap(6, 7);
+        }
+ 
+  //Panic Button
+    if(PanicBTN_onoff) {
+        if(event_release(D_UP) && get_ptime(D_UP) > 55) {
+            Switch=!Switch;
+            }
+                        }
+ 
+  //AutoRun (Work better when in game option "Press to Sprint" is turned OFF)
+  //Hold D pad Left and press  PS4 Circle or Xbox B to enable or disable AutoRun
+    if(get_val(15) && event_press(18)) {
+        AutoRun_onoff=!AutoRun_onoff;
+        }
+    if(AutoRun_onoff){
+        if(!combo_running(Strafe_v2) && !get_val(ADS_BTN) && get_val(L_Y) < -90) {
+                set_val(L_Stick, 100);
+                }                      
+                     }
+ 
+  //Parkour (if Parkour_onoff is TRUE, double tap PS4 Circle or Xbox B to activate, double tap again to desactivate)
+    if(Parkour_onoff){   
+        if(DbleClick > 0) DbleClick = DbleClick - get_rtime();
+            if(event_press(Parkour_BTN) && DbleClick <= 0) {
+                DbleClick = timelimit; 
+                }
+            else if(event_press(Parkour_BTN) && DbleClick > 0) {
+            Parkour = !Parkour;
+            }
+            if(Parkour) {
+                if(!combo_running(Strafe_v2) && !get_val(ADS_BTN) && get_val(L_Y) < -70) {
+                    set_val(Parkour_BTN,100);
+                    }
+                        }
+                      }
+ 
+  //Strafe (if Strafe_onoff is TRUE, double tap PS4 square or Xbox X to activate, double tap again to desactivate)
+    if(Strafe_onoff) { 
+        if(Dble_Tap > 0) Dble_Tap = Dble_Tap - get_rtime();
+            if(event_press(Strafe_BTN) && Dble_Tap <= 0) {
+                Dble_Tap = Tap_Speed; 
+                }
+            else if(event_press(Strafe_BTN) && Dble_Tap > 0) {
+            Loop = !Loop;
+            }
+        if(Loop) {
+        combo_run(Strafe_v2);
+        }
+            else{combo_stop(Strafe_v2);}
+                     }
+ 
+  //Hair Trigger
+    if(HairTrigger_onoff) {
+        if(get_val(FIRE_BTN) > 0){
+            set_val(FIRE_BTN,100);
+            }
+        if(get_val(ADS_BTN) > 0){
+            set_val(ADS_BTN,100);
+            }
+                    }
+ 
+  //Inverted Axis
+    if(Axis_inverted) {
+        set_val(R_Y, inv(get_val(R_Y)));
+        }
+ 
+  // AutoMark (Mark Targets)
+    if(AutoMark_onoff) {
+        if(get_val(ADS_BTN)) {
+            combo_run(MarkTargets);
+            }
+                }
+ 
+//_______________________________________________________________________________________________________________________//
+ 
+    if(!Switch) {
+// ___  ____ _ _  _ ____ ____ _   _    _ _ _ ____ ____ ___  ____ _  _ 
+// |__] |__/ | |\/| |__| |__/  \_/     | | | |___ |__| |__] |  | |\ | 
+// |    |  \ | |  | |  | |  \   |      |_|_| |___ |  | |    |__| | \|    color green
+ 
+//----------------------------------------------------- All Assault Rifle -----------------------------------------------//
+ 
+    if(LW_M4_onoff || BullFrog_onoff || MDR_onoff || WarlordAK_onoff) { // Any AR on
+    if(get_val(FIRE_BTN)){ 
+        combo_run(AntiRecoil);
+        }
+        else if(event_release(FIRE_BTN)) {
+            combo_stop(AntiRecoil);combo_stop(MDR);
+            }
+ 
+    if(combo_running(AntiRecoil)){ // If antirecoil run on
+         if(MDR_onoff) { // MDR on
+             combo_run(MDR);
+             } // MDR off             
+    } // If antirecoil run off
+ 
+} // Any AR off
+ 
+//----------------------------------------------------- LW M4 part ------------------------------------------------------//
+    if(LW_M4_onoff){ // LWM4 TRUE start
+ 
+    ANTI_RECOIL = 0;  // Do not modify this value
+    ANTI_RECOIL_LEFT  = 0;   // Change this value to compensate horizontal recoil        (0 - 100)
+    ANTI_RECOIL_RIGHT = 0;   // Change this value to compensate horizontal recoil        (0 - 100)
+ 
+    if(get_val(FIRE_BTN) && get_ptime(FIRE_BTN) >= 150) {  // Burst before antirecoil
+        if(!Striker_onoff){ 
+  // Antirecoil WITHOUT Striker
+        // Antirecoil after 150ms fireing
+        ANTI_RECOIL = 20;   // Change this value to compensate vertical recoil (0 - 100)
+        }
+        if(Striker_onoff){ 
+  // Antirecoil WITH Striker
+        // Antirecoil after 150ms fireing
+        ANTI_RECOIL = 12;   // Change this value to compensate vertical recoil (0 - 100)
+        }
+    }
+    if(get_val(FIRE_BTN) && get_ptime(FIRE_BTN) >= 650) {  // +500
+        if(!Striker_onoff){ 
+  // Antirecoil WITHOUT Striker
+        // Antirecoil after 650ms fireing
+        ANTI_RECOIL = 30;   // Change this value to compensate vertical recoil (0 - 100)
+        }
+        if(Striker_onoff){ 
+  // Antirecoil WITH Striker
+        // Antirecoil after 650ms fireing
+        ANTI_RECOIL = 17;   // Change this value to compensate vertical recoil (0 - 100)
+        }
+    }
+    if(get_val(FIRE_BTN) && get_ptime(FIRE_BTN) >= 1150) { // +500
+        if(!Striker_onoff){ 
+  // Antirecoil WITHOUT Striker
+        // Antirecoil after 1150ms fireing
+        ANTI_RECOIL = 40;   // Change this value to compensate vertical recoil (0 - 100)
+        }
+        if(Striker_onoff){ 
+  // Antirecoil WITH Striker
+        // Antirecoil after 1150ms fireing
+        ANTI_RECOIL = 22;   // Change this value to compensate vertical recoil (0 - 100)
+        }
+    }
+    if(get_val(FIRE_BTN) && get_ptime(FIRE_BTN) >= 1900) { // +750
+        if(!Striker_onoff){ 
+  // Antirecoil WITHOUT Striker
+        // Antirecoil after 1900ms fireing
+        ANTI_RECOIL = 51;   // Change this value to compensate vertical recoil (0 - 100)
+        }
+        if(Striker_onoff){ 
+  // Antirecoil WITH Striker
+        // Antirecoil after 1900ms fireing
+        ANTI_RECOIL = 28;   // Change this value to compensate vertical recoil (0 - 100)
+        }
+    }
+    if(get_val(FIRE_BTN) && get_ptime(FIRE_BTN) >= 2650) { // +750
+        if(!Striker_onoff){ 
+        // Antirecoil WITHOUT Striker
+        // Antirecoil after 2650ms fireing
+        ANTI_RECOIL = 63;   // Change this value to compensate vertical recoil (0 - 100)
+        }
+        if(Striker_onoff){ 
+        // Antirecoil WITH Striker
+        // Antirecoil after 2650ms fireing
+        ANTI_RECOIL = 38;  // Change this value to compensate vertical recoil (0 - 100)
+        }
+    } 
+    } // LWM4 TRUE end
+ 
+ 
+//----------------------------------------------------- BullFrog part ---------------------------------------------------//
+    if(BullFrog_onoff){ // BullFrog TRUE start
+ 
+    ANTI_RECOIL = 0;  // Do not modify this value
+    ANTI_RECOIL_LEFT  = 0;   // Change this value to compensate horizontal recoil        (0 - 100)
+    ANTI_RECOIL_RIGHT = 0;   // Change this value to compensate horizontal recoil        (0 - 100)
+ 
+    if(get_val(FIRE_BTN) && get_ptime(FIRE_BTN) >= 150) {  // Burst before antirecoil
+        if(!Striker_onoff){ 
+  // Antirecoil WITHOUT Striker
+        // Antirecoil after 150ms fireing
+        ANTI_RECOIL = 22;   // Change this value to compensate vertical recoil (0 - 100)
+        }
+        if(Striker_onoff){  
+  // Antirecoil WITH Striker
+        // Antirecoil after 150ms fireing
+        ANTI_RECOIL = 14;   // Change this value to compensate vertical recoil (0 - 100)
+        }
+    }
+    if(get_val(FIRE_BTN) && get_ptime(FIRE_BTN) >= 650) {  // +500
+        if(!Striker_onoff){ 
+  // Antirecoil WITHOUT Striker
+        // Antirecoil after 650ms fireing
+        ANTI_RECOIL = 33;   // Change this value to compensate vertical recoil (0 - 100)
+        }
+        if(Striker_onoff){  
+  // Antirecoil WITH Striker
+        // Antirecoil after 650ms fireing
+        ANTI_RECOIL = 21;   // Change this value to compensate vertical recoil (0 - 100)
+        }
+    }
+    if(get_val(FIRE_BTN) && get_ptime(FIRE_BTN) >= 1150) { // +500
+        if(!Striker_onoff){ 
+  // Antirecoil WITHOUT Striker
+        // Antirecoil after 1150ms fireing
+        ANTI_RECOIL = 45;   // Change this value to compensate vertical recoil (0 - 100)
+        }
+        if(Striker_onoff){  
+  // Antirecoil WITH Striker
+        // Antirecoil after 1150ms fireing
+        ANTI_RECOIL = 28;   // Change this value to compensate vertical recoil (0 - 100)
+        }
+    }
+    if(get_val(FIRE_BTN) && get_ptime(FIRE_BTN) >= 1900) { // +750
+        if(!Striker_onoff){ 
+  // Antirecoil WITHOUT Striker
+        // Antirecoil after 1900ms fireing
+        ANTI_RECOIL = 59;   // Change this value to compensate vertical recoil (0 - 100)
+        }
+        if(Striker_onoff){  
+  // Antirecoil WITH Striker
+        // Antirecoil after 1900ms fireing
+        ANTI_RECOIL = 36;   // Change this value to compensate vertical recoil (0 - 100)
+        }
+    }
+    if(get_val(FIRE_BTN) && get_ptime(FIRE_BTN) >= 2650) { // +750
+        if(!Striker_onoff){ 
+  // Antirecoil WITHOUT Striker
+        // Antirecoil after 2650ms fireing
+        ANTI_RECOIL = 67;   // Change this value to compensate vertical recoil (0 - 100)
+        }
+        if(Striker_onoff){  
+  // Antirecoil WITH Striker
+        // Antirecoil after 2650ms fireing
+        ANTI_RECOIL = 46;   // Change this value to compensate vertical recoil (0 - 100)
+        }
+    } 
+    } // BullFrog TRUE end
+ 
+//----------------------------------------------------- MDR part --------------------------------------------------------//
+    if(MDR_onoff) { // MDR TRUE start
+ 
+    AR_Time_1   = 71;    // Change this value if you add magazine with rate of fire 
+    AR_Time_2   = 101;   // Change this value if you add magazine with rate of fire
+    ANTI_RECOIL_LEFT  = 0;   // Change this value to compensate horizontal recoil        (0 - 100)
+    ANTI_RECOIL_RIGHT = 0;   // Change this value to compensate horizontal recoil        (0 - 100)
+ 
+  // Recoil WITH Striker mode
+        if(Striker_onoff){ // SK on start 
+        ANTI_RECOIL = 16;  // Change this value to compensate vertical recoil        (0 - 100)
+        } // SK on end
+ 
+ 
+  // Recoil WITHOUT Striker mode 
+        if(!Striker_onoff){ // SK off start
+        ANTI_RECOIL = 22;   // Change this value to compensate vertical recoil        (0 - 100)
+        } // SK off end
+    } // MDR TRUE end
+ 
+//----------------------------------------------------- Warlord / AK47 part ---------------------------------------------//
+    if(WarlordAK_onoff){ // Warlord/AK47 TRUE start
+ 
+    ANTI_RECOIL = 0;  // Do not modify this value
+    ANTI_RECOIL_LEFT  = 5;   // Change this value to compensate horizontal recoil        (0 - 100)
+    ANTI_RECOIL_RIGHT = 0;   // Change this value to compensate horizontal recoil        (0 - 100)
+ 
+    if(get_val(FIRE_BTN) && get_ptime(FIRE_BTN) >= 150) {  // Burst before antirecoil
+        if(!Striker_onoff){ 
+  // Antirecoil WITHOUT Striker
+        // Antirecoil after 150ms fireing
+        ANTI_RECOIL = 18;   // Change this value to compensate vertical recoil (0 - 100)
+        }
+        if(Striker_onoff){  
+  // Antirecoil WITH Striker
+        // Antirecoil after 150ms fireing
+        ANTI_RECOIL = 14;   // Change this value to compensate vertical recoil (0 - 100)
+        }
+    }
+    if(get_val(FIRE_BTN) && get_ptime(FIRE_BTN) >= 800) {  // +650
+        if(!Striker_onoff){ 
+  // Antirecoil WITHOUT Striker
+        // Antirecoil after 8000ms fireing
+        ANTI_RECOIL = 26;   // Change this value to compensate vertical recoil (0 - 100)
+        }
+        if(Striker_onoff){  
+  // Antirecoil WITH Striker
+        // Antirecoil after 800ms fireing
+        ANTI_RECOIL = 16;   // Change this value to compensate vertical recoil (0 - 100)
+        }
+    }
+    if(get_val(FIRE_BTN) && get_ptime(FIRE_BTN) >= 1450) { // +650
+        if(!Striker_onoff){ 
+  // Antirecoil WITHOUT Striker
+        // Antirecoil after 1450ms fireing
+        ANTI_RECOIL = 35;   // Change this value to compensate vertical recoil (0 - 100)
+        }
+        if(Striker_onoff){  
+  // Antirecoil WITH Striker
+        // Antirecoil after 1450ms fireing
+        ANTI_RECOIL = 18;   // Change this value to compensate vertical recoil (0 - 100)
+        }
+    }
+    if(get_val(FIRE_BTN) && get_ptime(FIRE_BTN) >= 2400) { // +950
+        if(!Striker_onoff){ 
+  // Antirecoil WITHOUT Striker
+        // Antirecoil after 2400ms fireing
+        ANTI_RECOIL = 45;   // Change this value to compensate vertical recoil (0 - 100)
+        }
+        if(Striker_onoff){  
+  // Antirecoil WITH Striker
+        // Antirecoil after 2400ms fireing
+        ANTI_RECOIL = 21;   // Change this value to compensate vertical recoil (0 - 100)
+        }
+    }
+    if(get_val(FIRE_BTN) && get_ptime(FIRE_BTN) >= 3650) { // +1250
+        if(!Striker_onoff){ 
+  // Antirecoil WITHOUT Striker
+        // Antirecoil after 3650ms fireing
+        ANTI_RECOIL = 56;   // Change this value to compensate vertical recoil (0 - 100)
+        }
+        if(Striker_onoff){  
+  // Antirecoil WITH Striker
+        // Antirecoil after 3650ms fireing
+        ANTI_RECOIL = 27;   // Change this value to compensate vertical recoil (0 - 100)
+        }
+    }
+    } // Warlord/AK47 TRUE end
+ 
+}    //PRIMARY end
+ 
+//_______________________________________________________________________________________________________________________//
+ 
+    if(Switch) {
+// ____ ____ ____ ____ _  _ ___  ____ ____ _   _    _ _ _ ____ ____ ___  ____ _  _ 
+// [__  |___ |    |  | |\ | |  \ |__| |__/  \_/     | | | |___ |__| |__] |  | |\ | 
+// ___] |___ |___ |__| | \| |__/ |  | |  \   |      |_|_| |___ |  | |    |__| | \|    color red
+ 
+//----------------------------------------------------- All Shotgun part ------------------------------------------------//
+//---------------------------------------------------- Shotgun shoot mode -----------------------------------------------//
+ 
+    if(SASG_2_onoff || Super90_2_onoff || Showstopper_2_onoff || M870_2_onoff){ // Shotguns TRUE on
+ 
+ 
+  // Shoot with ADS only
+    if(PopShot_with_ADS) { //ADS on
+        if(get_val(ADS_BTN)) {
+            combo_run(AntiRecoil);combo_run(Shotgun);
+            }
+        else if(event_release(ADS_BTN)) {
+            combo_stop(AntiRecoil);combo_stop(Shotgun);
+            }
+    } //ADS off
+ 
+  // Shoot with FIRE only
+    if(PopShot_with_FIRE) { //FIRE on
+        if(get_val(FIRE_BTN)) {
+            set_val(ADS_BTN, 100);
+            combo_run(AntiRecoil);combo_run(Shotgun);
+            }
+        else if(event_release(FIRE_BTN)) {
+            combo_stop(AntiRecoil);combo_stop(Shotgun);
+            }
+    } //FIRE off
+ 
+  // Shoot with ADS + FIRE
+    if(!PopShot_with_ADS && !PopShot_with_FIRE) { // ADS + FIRE on
+        if(get_val(FIRE_BTN)) {
+            combo_run(AntiRecoil);combo_run(Shotgun_v2);
+            }
+        else if(event_release(FIRE_BTN)) {
+            combo_stop(AntiRecoil);combo_stop(Shotgun_v2);
+            }
+    } // ADS + FIRE off
+ 
+} //Shotguns TRUE end    
+ 
+//----------------------------------------------------- SASG part -------------------------------------------------------//
+    if(SASG_2_onoff) { // SASG on
+    SG_Time1=64;
+    SG_Time2=16;
+    SG_Time3=253;     // Change Time3 if you add magazine with rate of fire
+    ANTI_RECOIL_LEFT  = 0;   // Change this value to compensate horizontal recoil        (0 - 100)
+    ANTI_RECOIL_RIGHT = 0;   // Change this value to compensate horizontal recoil        (0 - 100)
+ 
+        // AntiRecoil with Striker mode
+        if(Striker_onoff){
+            ANTI_RECOIL = 10;   // Change this value to compensate vertical recoil (0 - 100)
+            }
+ 
+        // AntiRecoil without Striker mode    
+        if(!Striker_onoff){
+            ANTI_RECOIL = 20;   // Change this value to compensate vertical recoil (0 - 100)
+             }    } // SASG off
+ 
+//----------------------------------------------------- Super90 part ----------------------------------------------------//
+    if(Super90_2_onoff) { // Super90 on
+    SG_Time1=64;
+    SG_Time2=16;
+    SG_Time3=320;     // Change Time3 if you add magazine with rate of fire
+    ANTI_RECOIL_LEFT  = 0;   // Change this value to compensate horizontal recoil        (0 - 100)
+    ANTI_RECOIL_RIGHT = 0;   // Change this value to compensate horizontal recoil        (0 - 100)
+ 
+        // AntiRecoil with Striker mode
+        if(Striker_onoff){
+            ANTI_RECOIL = 10;   // Change this value to compensate vertical recoil (0 - 100)
+            }
+ 
+        // AntiRecoil without Striker mode    
+        if(!Striker_onoff){
+            ANTI_RECOIL = 20;   // Change this value to compensate vertical recoil (0 - 100)
+             }
+    } // Super90 off
+ 
+//----------------------------------------------------- Showstopper part ------------------------------------------------//
+    if(Showstopper_2_onoff) { // Showstopper on
+    SG_Time1=64;
+    SG_Time2=16;
+    SG_Time3=169;     // Change Time3 if you add magazine with rate of fire
+    ANTI_RECOIL_LEFT  = 0;   // Change this value to compensate horizontal recoil        (0 - 100)
+    ANTI_RECOIL_RIGHT = 0;   // Change this value to compensate horizontal recoil        (0 - 100)
+ 
+        // AntiRecoil with Striker mode
+        if(Striker_onoff){
+            ANTI_RECOIL = 10;   // Change this value to compensate vertical recoil (0 - 100)
+            }
+ 
+        // AntiRecoil without Striker mode    
+        if(!Striker_onoff){
+            ANTI_RECOIL = 20;   // Change this value to compensate vertical recoil (0 - 100)
+             }
+    } // Showstopper off
+ 
+//----------------------------------------------------- M870 part -------------------------------------------------------//
+    if(M870_2_onoff) { // M870 on
+    SG_Time1=700;     // Change Time1 if you add magazine with rate of fire
+    SG_Time2=16;
+    SG_Time3=84;
+    ANTI_RECOIL_LEFT  = 0;   // Change this value to compensate horizontal recoil        (0 - 100)
+    ANTI_RECOIL_RIGHT = 0;   // Change this value to compensate horizontal recoil        (0 - 100)
+ 
+        // AntiRecoil with Striker mode
+        if(Striker_onoff){
+            ANTI_RECOIL = 8;   // Change this value to compensate vertical recoil (0 - 100)
+            }
+ 
+        // AntiRecoil without Striker mode    
+        if(!Striker_onoff){
+            ANTI_RECOIL = 15;   // Change this value to compensate vertical recoil (0 - 100)
+             }
+    } // M870 off
+}    //SECONDARY end
+//_______________________________________________________________________________________________________________________//
+ 
+    if(abs(get_val(R_Y)) > AR_Release || abs(get_val(R_X)) > 100) {
+        combo_stop(AntiRecoil);
+        }
+ 
+  // COLOR INDICATION
+     if(!Switch) colourled(Green); 
+     else colourled(Red); 
+ 
+}    //main end  
+//  _  _ ____ _ _  _    ____ _  _ ___  
+//  |\/| |__| | |\ |    |___ |\ | |  \ 
+//  |  | |  | | | \|    |___ | \| |__/
+//_______________________________________________________________________________________________________________________//
+//  ____ ____ _  _ ___  ____    ____ ____ ____ ___ _ ____ _  _ 
+//  |    |  | |\/| |__] |  |    [__  |___ |     |  | |  | |\ | 
+//  |___ |__| |  | |__] |__|    ___] |___ |___  |  | |__| | \| 
+ 
+combo MDR {    // RAPIDFIRE FOR MDR
+     wait(AR_Time_1);
+     set_val(FIRE_BTN, 0);
+     wait(AR_Time_2);
+     }
+ 
+combo Shotgun_v2 { // POP SHOT = ADS+FIRE
+     wait(SG_Time1);
+     set_val(FIRE_BTN, 0);
+     set_val(ADS_BTN, 0);
+     wait(SG_Time2);
+     set_val(FIRE_BTN, 0);
+     wait(SG_Time3);
+    }
+ 
+combo Shotgun {    // POP SHOT = ADS ONLY OR FIRE ONLY 
+     wait(SG_Time3);            
+     set_val(FIRE_BTN, 100);
+     wait(SG_Time1);
+     set_val(FIRE_BTN, 0);
+     set_val(ADS_BTN, 0);
+     wait(SG_Time2);
+    }
+ 
+//_______________________________________________________________________________________________________________________//
+ 
+combo Strafe_v2 { // Run straight, right, straight, left 
+     set_val(L_Y, -100);
+     set_val(L_Stick, 100);
+     wait(straight_time);
+     set_val(L_X, 100);
+     set_val(L_Y, 50);
+     wait(side_time);
+     set_val(L_Y, -100);
+     set_val(L_Stick, 100);
+     wait(straight_time);
+     set_val(L_X, -100);
+     set_val(L_Y, 50);
+     wait(side_time);
+    }
+ 
+combo MarkTargets {
+     set_val(D_UP, 100);
+     wait(50);
+     set_val(D_UP, 0);
+     wait(1000);
+    }
+ 
+//_______________________________________________________________________________________________________________________// 
+ 
+combo AntiRecoil { 
+     anti_recoil = get_val(R_Y) + ANTI_RECOIL;
+     if(anti_recoil > 100) anti_recoil = 100;
+     set_val(R_Y, anti_recoil);
+     anti_recoil_left = get_val(R_X) - ANTI_RECOIL_LEFT;
+     if(anti_recoil_left > 100) anti_recoil_left = 100;
+     set_val(R_X, anti_recoil_left);
+     anti_recoil_right = get_val(R_X) + ANTI_RECOIL_RIGHT;
+     if(anti_recoil_right > 100) anti_recoil_right = 100;
+     set_val(R_X, anti_recoil_right);
+    } 
+ 
+// COLOR LED function
+ 
+function colourled(Colour) {
+    Col_ind=(Colour*4) - 3;
+    set_led(LED_1,dbyte(Col_ind));
+    set_led(LED_2,dbyte(Col_ind + 1));
+    set_led(LED_3,dbyte(Col_ind + 2));
+    set_led(LED_4,dbyte(Col_ind + 3));
+   }
+//end

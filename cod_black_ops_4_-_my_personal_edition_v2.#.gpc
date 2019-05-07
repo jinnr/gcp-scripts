@@ -1,0 +1,593 @@
+// GPC Online Library
+// cod_black_ops_4_-_my_personal_edition_v2.#.gpc
+
+/*
+
+	
+			
+*************************************************************************************                 
+						   
+							A GPC POWER SCRIPT BY CRESCENS 			
+				 __                     __   ___     __       ___     
+				/  `  /\  |    |       /  \ |__     |  \ |  |  |  \ / 
+				\__, /~~\ |___ |___    \__/ |       |__/ \__/  |   |  
+				                                                      
+				 __             __           __   __   __             
+				|__) |     /\  /  ` |__/    /  \ |__) /__`    | \  /  
+				|__) |___ /~~\ \__, |  \    \__/ |    .__/    |  \/  
+				
+		 __   ___  __   __   __                     ___  __    ___    __       
+		|__) |__  |__) /__` /  \ |\ |  /\  |       |__  |  \ |  |  | /  \ |\ | 
+		|    |___ |  \ .__/ \__/ | \| /~~\ |___    |___ |__/ |  |  | \__/ | \| 
+                                                      				  
+               				     MY PERSONAL SCRIPT. 
+               				 
+************************************************************************************* 					
+	                                                                       
+	*V2.7
+
+	FEATURES: 
+	RAPID FIRE (WITH ADJUSTABLE RATE OF FIRE, LEVEL 1 - 25)
+	BURST FIRE (WITH ADJUSTABLE ROUNDS PER BURST, 3 - 6 ROUNDS)
+	KILL SWITCH FOR RAPID FIRE AND OTHER FIRE MODS WHEN YOU ACTIVATE SPECIAL POWER OR KILL STREAK
+	AIM ASSIST, AND MORE
+
+	Built for CronusMax works with all consoles
+	Added WW2 reload times / so script can be used with WW2 as well
+	Credits: EVERYONE at CronusMax, but mostly Batts, Excalibur, Lex Lost, xDOT22. 	
+                                                                    
+	INSTRUCTIONS: tinyurl.com/scriptinstructions          
+		
+	HOLD DOWN + TAP Y / TRIANGLE = SWITCH ON/OFF SCRIPT 
+	When switched off you can navigate through the game menu with ease. 
+                                                
+	TO READ THE FULL INSTRUCTIONS GO TO tinyurl.com/scriptinstructions (OPEN THIS
+	LINK IN YOUR BROWSER)
+
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+| | | | |U|S|E|R| |C|O|N|F|I|G|U|R|A|T|I|O|N|| | | | | | | | | | | | | | | | | | | | |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+       
+//---------------------------/ START USER CONFIG---------------------------------------*/
+
+define AIM__INVERTED=FALSE;		// IF YOU PLAY WITH AIM INVERTED SET "TRUE;"
+define SUPER__POWER__SW=13;		// 13 = D-PAD UP - ONE TAP WILL HOLD BOTH BUMPERS TO ACTIVATE SUPER MOVE/POWER
+define KILL__STREAK__SW=15;		// 15 = D-PAD LEFT - ONE TAP WILL HOLD Y TO ACTIVATE KILL STREAK
+define EASY__RUN=TRUE;			// EASY RUN. PRESS LEFT STICK FORWARD AND AUTO SPRINT WILL ACTIVATE. YOU CAN SET THE SENSITIVITY VALUE BELOW
+define CNCL__RELOAD=TRUE;		// AUTO CANCEL RELOAD: DURING A RELOAD YOU CAN CANCEL THE RELOAD AT ANY TIME BY PRESSING FIRE (OR AIM)
+define RELOAD__TIME=2000;		// FILL OUT THE RELOAD TIME OF THE WEAPON YOU USE WITH THE LONGEST RELOAD TIME - 2000 IS GOOD AVERAGE THOUGH
+define EASY__MELEE=TRUE;		// AN UNMISSABLE FEATURE, ESPECIALLY FOR TACTICAL BTN LAYOUT: IF EASY RUN IS ON, USE YOUR LEFT STICK FOR ULTRA FAST MELEE  
+define turbo__trigger=TRUE;		// HAIR TRIGGERS ON BY DEFAULT FOR BOTH TRIGGERS. TIP: WORKS WITH PRESS SENSITIVE BTN ACTIVATIONS 
+define EASY__SLIDE_DROP=TRUE;	// TAP PRONE BTN TO CROUCH. HOLD FOR A SECOND TO PRONE. WHEN SPRINTING, TAP ONCE SHORTLY ON THE PRONE BTN TO SLIDE SUPER SMOOTHLY
+int    STICKY__AIM=TRUE;		// AIM ASSIST. HINT: AIM ASSIST IS STRONGER AT A LOWER SENSITIVTY. 
+int    AIM__CORRECT=TRUE;		// TAKE FULL ADVANTAGE OF AIM ASSIST, BY MAKING IT STRONGER WHEN YOU AIM AND STRONGEST WHEN YOU AIM & FIRE	
+int	   FIRE_AND_HEAL=FALSE;		// AUTO HEAL 
+int    STOP_F_MOD=FALSE;		// KILL SWITCH FIRE MODS (KS - SWITCHES OF FIRE MODS FOR 3O SEC. RESET: HOLD RELOAD FOR 2 SEC.  
+int    VIBRATION=30;			// THE VIBRATION VALUE SETS THE STRENGTH OF THE RUMBLES WHILST THE KILLSWITCH IN ON.
+int    ADS_SENS=86, GEN_SENS=100, HIP_SENS=100, ADS_FIRE_SENS=85, Use_sens;
+/*		    
+//---------------------------/ END USER CONFIG---------------------------------------
+
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+| | | | |C|O|N|T|R|O|L|S| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+*/
+define HOME=0;			//PS4_PS / XB1_XBOX
+define VIEW_reset=1;	//PS4_SHARE / XB1_VIEW
+define MENU_save=2;		//PS4_OPTIONS / XB1_MENU
+define LETHAL=3;		//PS4_R1 / XB1_RB
+define FIRE=4;			//PS4_R2 / XB1_RT
+define PRONE=5;			//PS4_R3 / XB1_RS
+define TACTICAL=6;		//PS4_L1 / XB1_LB
+define ADS=7;			//PS4_L2 / XB1_LT
+define SPRINT=8;		//PS4_L3 / XB1_LS 
+define RX=9;			//PS4_RX / XB1_RX
+define RY=10;			//PS4_RY / XB1_RY
+define LX=11;			//PS4_LX / XB1_LX
+define LY=12;			//PS4_LY / XB1_LY
+define UP=13;			//PS4_UP / XB1_UP
+define DOWN=14;			//PS4_DOWN / XB1_DOWN
+define LEFT=15;			//PS4_LEFT / XB1_LEFT
+define RIGHT=16;		//PS4_RIGHT / XB1_RIGHT
+define SW_WEAPON=17;	//PS4_TRIANGLE / XB1_Y
+define MELEE=18;		//PS4_CIRCLE / XB1_B
+define JUMP=19;			//PS4_CROSS / XB1_A
+define RELOAD=20;		//PS4_SQUARE / XB1_X
+define GYROX_PR1=24;	//PS4_GYROX / XB1_PR1
+define GYROY_PR2=25;	//PS4_GYROY / XB1_PR2
+define GYROZ_PL1=26;	//PS4_GYROZ / XB1_PL1
+define TOUCH_PL2=27;	//PS4_TOUCH / XB1_PL2
+/*
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+| | | | |L|E|D|S| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | 
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/
+define Off=0;
+define Green=1;
+define Blue=2;
+define Pink=3;
+define Red=4;
+define SkyBlue=5;
+define Yellow=6;
+define White=7;
+/*
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+| | | | |D|A|T|A| | | | | | | | | | | | | | | | | | | | | | || | | | | | || | | | | | |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/
+data(
+0,0,0,0,//Off
+0,0,2,0,//Green
+2,0,0,0,//Blue
+0,0,0,2,//Pink
+0,2,0,0,//Red
+2,0,2,0,//SkyBlue
+0,2,2,0,//Yellow
+2,2,2,2//White
+);
+/*
+--/ END USER CONFIG
+
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ | | | | | | | | |V|A|R|I|A|B|L|E|S| | | | | | | | | | | | | | | | | | | | | | | | | | |
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/ 
+int    hold_time=35;
+int    rest_time=35;
+int    PrimaryWeapon=TRUE;
+int    RF_KS=FALSE;
+int    R2F_K2S=FALSE;
+int    b_reload;
+int    Secondary=FALSE; //set to TRUE if you preffer to load the script with rapid fire for seconday weapon by default. 
+int    RATE_OF_FIRE; //Range: 1 to 25 RPS (Round/s)
+int    easy_run_KS=FALSE;
+int    reload__WW2;
+int    fire__mods_ON=TRUE;
+int    AKIMBO__AUTO_AIM=FALSE;
+int    Fire_KS=FALSE;
+int    autofire=1;
+int    hold_burst=200;     // BURST FIRE
+int    rest_burst=100;
+int    rumble;
+int    Script_onoff;
+
+/*
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ | | | | | | | | |I|N|I|T| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/ 
+init {
+
+  RATE_OF_FIRE = get_pvar(SPVAR_1,1,25, 7);     
+}
+/*
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ | | | | | | | | |M|A|I|N| |B|L|O|C|K| |S|T|A|R|T|S| |H|E|R|E| | | | | | | | | | | | | |
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/
+main {
+set_val (TRACE_1, RATE_OF_FIRE);
+
+if(get_val(DOWN)){//hold DOWN
+if(event_press(17)){ 
+	Script_onoff=!Script_onoff;}
+set_val (17,0);}
+
+
+
+if(Script_onoff){color_led(Off);
+
+}
+if(!Script_onoff){//Script Enable to start
+
+
+/*
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ | | | | | | | | |H|O|L|D| |T|I|M|E|S| | | | | | | | | | | | | | | | | | | | | | | | | |
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/
+
+     
+     hold_time = 500 / RATE_OF_FIRE;
+     rest_time = hold_time - 20;
+     if(rest_time < 0) rest_time = 0;
+     
+
+/*
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+| | | |M|E|N|U| |A|D|S| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/
+
+if(get_val(ADS) && !get_val(18)){//hold ADS button
+if (get_val(VIEW_reset) && get_ptime(VIEW_reset)> 600){ 
+      RESET_Defaults();   
+}
+
+//--RAPID FIRE ON SECONDARY
+	if(event_press(UP)){//D-pad UP 
+		PrimaryWeapon=TRUE;
+		RF_KS=FALSE;
+		R2F_K2S=TRUE;
+		Secondary=TRUE;
+		Fire_KS=FALSE;
+		rumble (Secondary);
+		}
+//--RAPID FIRE OFF 
+	if(event_press(DOWN)){//D-pad DOWN
+		PrimaryWeapon=TRUE;
+		RF_KS=FALSE;
+		R2F_K2S=FALSE;
+		Secondary=FALSE;
+		Fire_KS=FALSE;
+		rumble(R2F_K2S);
+}
+//--RAPID FIRE ON
+	if(event_release(RIGHT)){//D-pad RIGHT
+		PrimaryWeapon=TRUE;
+		RF_KS=TRUE;		
+		R2F_K2S=TRUE;
+		Secondary=FALSE;
+		Fire_KS=TRUE; // SET TO FALSE IF YOU WANT TO REMOVE THE FIRE MOD KILL SWITCH 
+		rumble (RF_KS);
+}
+	if(get_val(RIGHT)){//D-pad RIGHT
+   		if(event_release (1)) {autofire = 1;}
+   	 else if(event_release(2)) {autofire = 2;}
+ 
+}
+//--AKIMBO 
+	if(event_press(LEFT)){//D-pad LEFT
+			AKIMBO__AUTO_AIM = !AKIMBO__AUTO_AIM;
+		 	rumble (AKIMBO__AUTO_AIM);
+			PrimaryWeapon=TRUE;
+			Secondary=TRUE;		
+			Fire_KS=TRUE; // SET TO FALSE IF YOU WANT TO REMOVE THE FIRE MOD KILL SWITCH 
+}
+	set_val(1,0); set_val(2,0);
+}
+/*
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ | | | | | | | | |T|O|G|G|L|E|S| | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/
+ if(get_val(DOWN) && get_val (ADS)){ 	
+ 	 	
+ 	if (event_press (FIRE)){//FIRE
+ 		AIM__CORRECT = !AIM__CORRECT; 
+ 		rumble(AIM__CORRECT); 	 	
+ 	} 		 	
+ 	if (event_press (JUMP)) {//TAP JUMP
+		STOP_F_MOD = !STOP_F_MOD;
+		rumble (!STOP_F_MOD);
+	}
+ 	if (event_press (RELOAD)){//TAP X
+ 		reload__WW2 = !reload__WW2;
+ 		rumble (reload__WW2);	
+ 	} 	   
+   if (event_press (TACTICAL)){//TACTICAL
+   		FIRE_AND_HEAL=!FIRE_AND_HEAL;			
+		rumble(FIRE_AND_HEAL);
+	}	
+	set_val (DOWN,0);set_val (RELOAD,0);set_val(19,0);set_val (18,0);set_val (17,0); set_val (20,0);  
+	}	
+if (STOP_F_MOD) { 
+	combo_run (STOP_FIRE_KS);}
+	
+
+     if(get_val(18) && event_press(2)) RATE_OF_FIRE = RATE_OF_FIRE + 1;  
+     if(get_val(18) && get_val(2))set_val(2,0);
+     if (RATE_OF_FIRE>25) RATE_OF_FIRE=25;
+     
+     if(get_val(18) && event_press(1)) RATE_OF_FIRE = RATE_OF_FIRE - 1; 
+     if(get_val(18)&&get_val(1))set_val(1,0);
+     if (RATE_OF_FIRE<1) RATE_OF_FIRE=1;
+     //-------------------------------------------------------
+     if(get_val(18) && !get_val (ADS))
+       {
+        if     (event_press(13))hold_burst=200;// UP    = 3 Round per Burst
+        else if(event_press(16))hold_burst=300;// RIGHT = 4 Round per Burst
+        else if(event_press(14))hold_burst=400;// DOWN  = 5 Round per Burst
+        else if(event_press(15))hold_burst=600;// LEFT  = 6 Round per Burst   
+          
+set_val(13,0);set_val (16,0);set_val (14,0); set_val (15,0);  
+}
+if (event_release(18)&& get_ptime(18)>600) save_pvars ();  
+	
+/*
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ | | | | | | | | |E|A|S|Y| |S|L|I|D|E| | | | | | | | | | | | | | | | | | | | | | | | | |
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/ 
+if(EASY__SLIDE_DROP){
+if (event_release(PRONE)&& get_ptime(PRONE)<200)combo_run(DROP_SHOT);
+
+
+}
+/*
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ | | | | | | | | |A|K|I|M|B|O| |/|A|U|T|O| |A|I|M| | | | | | | | | | | | | | | | | | | |
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/ 
+  
+if(AKIMBO__AUTO_AIM && PrimaryWeapon && get_val(FIRE)) 
+             set_val(ADS,100);         
+                                   
+/*
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ | | | | | | | | |T|U|R|B|O| |B|T|N| |A|.|K|.| |H|A|I|R| |T|R|I|G|G|E|R|S| | | | | | | |
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/  
+turbo(FIRE);
+turbo(ADS); 
+/*
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ | | | | | | | | |A|I|M| | |C|O|R|R|E|C|T|I|O|N|S| | | | | | | | | | | | | | | | | | | |
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/  
+if(AIM__CORRECT){ 
+Aim__Correction (Use_sens);
+}
+
+/*
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ | | | | | | | | |A|U|T|O| |H|E|A|L| | | | | | | | | | | | | | | | | | | | | | | | | | |
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/ 
+
+
+if (event_release (FIRE) && FIRE_AND_HEAL) combo_run (Fire_and_Heal);
+
+   
+ /*
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ | | | | | | | | |E|A|S|Y| |R|U|N| | | | | | | | | | | | | | | | | | | | | | | | | | | |
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/
+if (EASY__RUN&& !easy_run_KS && get_val(LY) < -5 && !get_val(ADS)) 
+ 	combo_run (EASY_RUN);
+
+/*
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ | | | | | | | | |E|A|S|Y| |M|E|L|E|E| | | | | | | | | | | | | | | | | | | | | | | | | |
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/
+
+if (EASY__MELEE && get_val(SPRINT)) set_val(MELEE, 100);
+ 
+/*
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ | | | | | | | | |R|A|P|I|D| |F|I|R|E| |&| |J|I|T|T|E|R| | | | | | | | | | | | | | | | |
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/
+
+//-- RF PRIMARY  
+
+if (PrimaryWeapon && RF_KS && fire__mods_ON && get_val(FIRE)){  
+     if(autofire == 1) combo_run(RAPID_FIRE);
+     else if(autofire == 2) combo_run(BURST_FIRE);     
+}  
+//- RF SECONDARY 
+ 
+ if(!PrimaryWeapon && R2F_K2S && fire__mods_ON)   
+  if(get_val(FIRE)) { 
+  	combo_run (RAPID_FIRE);
+} 
+
+/*
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ | | | | | | | | |R|E|S|E|T| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/
+
+if(event_release(RELOAD) && get_ptime(RELOAD)> 200 &&(Secondary)){ 
+PrimaryWeapon = TRUE; rumble(!PrimaryWeapon);}
+
+if(event_release(RELOAD) && get_ptime(RELOAD)> 200 && combo_running (NO__FIRE_MOD)){ 
+	fire__mods_ON=TRUE; combo_stop (NO__FIRE_MOD); rumble (!fire__mods_ON);}  
+
+if (Secondary){ 
+	if(event_release(SW_WEAPON)&& get_ptime(SW_WEAPON)< 200  && !get_val (14)){  
+  	PrimaryWeapon = !PrimaryWeapon; 
+  	if (!PrimaryWeapon) rumble(!PrimaryWeapon); 
+  }
+}
+ /*
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ | | | | | | | | |C|A|N|C|E|L| |R|E|L|O|A|D| | | | | | | | | | | | | | | | | | | | | | |
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/
+ 
+ if (CNCL__RELOAD) {
+ 	if(event_press(FIRE)  && b_reload){combo_run(CANCEL_RLD); }
+ 	if(event_press(ADS)  && b_reload){combo_run(CANCEL_RLD);}
+ 		if(event_release(RELOAD) && get_ptime(RELOAD)< 200){ 
+ 		 combo_run (STOP_SPRINT); combo_run(RELOAD_END); } 
+}
+/*
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ | | | | | | | | |A|I|M| |A|S|S|I|S|T| | | | | | | | | | | | | | | | | | | | | | | | | |
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/
+
+
+if(STICKY__AIM && get_val(ADS)) combo_run(AA_XY);
+  	else combo_stop(AA_XY); 
+
+/*
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+| | | | |K|I|L|L| |S|W|I|T|C|H| |&| |S|U|P|E|R| |P|W| |S|W|I|T|C|H| | | | | | | | | | |
++-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/
+if (!get_val (18))
+	{
+	if(event_press (SUPER__POWER__SW) && !get_val (ADS) && get_ptime(SUPER__POWER__SW)< 15) 
+		{ 
+			combo_run(SPECIAL);
+		}
+	if(event_press (KILL__STREAK__SW) &&  !get_val (ADS) && get_ptime(KILL__STREAK__SW)< 15) 
+		{ 
+			combo_run(KILL);
+		}
+	}
+/*
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ | | | | | | | | |L|E|D|S| | | | | | | | | | | | | | | | | | | | | | | | | | | | | | | |
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/
+PLAY__LEDS ();
+
+    if(rumble)  
+        combo_run(RUMBLE);
+}
+}
+/*
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+
+ | | | | | | | | |C|O|M|B|O| |S|E|C|T|I|O|N| | | | | | | | | | | | | | | | | | | | | | |
+ +-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+*/
+combo AA_XY {
+	set_val(10,xy_val(10,24));
+	wait(20);
+	set_val(9,xy_val(9,24));
+	set_val(11,xy_val(11,24));
+	wait(20);
+	set_val(10,xy_val(10,24 * -1));
+	wait(20);
+	set_val(9,xy_val(9,24 * -1));
+	set_val(11,xy_val(11,24 * -1));
+	wait(20);
+}
+combo STOP_FIRE_KS {
+	Fire_KS=FALSE;
+}
+combo RUMBLE{
+    set_rumble(RUMBLE_B,100);
+    wait(150);
+    reset_rumble();
+    wait(150);
+    rumble--;
+}
+combo STOP_SPRINT {  
+if (reload__WW2)
+	easy_run_KS = TRUE;  
+	wait(2000);
+	easy_run_KS = FALSE; 
+}
+combo RAPID_FIRE { 
+	set_val(FIRE,100); 
+	wait(hold_time); 
+	set_val(FIRE,  0); 
+	wait(rest_time);
+} 
+combo BURST_FIRE {
+ 	set_val(FIRE, 100);
+ 	wait(hold_burst);
+ 	set_val(FIRE, 0);
+ 	wait(rest_burst);
+ 	set_val(FIRE, 0);
+}
+combo RELOAD_END { 
+	b_reload=TRUE;
+	wait(RELOAD__TIME);
+	b_reload=FALSE;
+} 
+combo Fire_and_Heal { 	
+	wait(20);
+	if (!get_val (ADS)|| !get_val (FIRE))
+    set_val(TACTICAL,100);
+    wait(40); 
+}
+combo CANCEL_RLD {
+	set_val(SW_WEAPON, 100);
+	wait(30);
+	set_val(SW_WEAPON, 0);
+	wait(20);
+	set_val(SW_WEAPON, 100);
+	wait(30);
+	set_val(SW_WEAPON, 0);
+	wait(20);
+	b_reload=FALSE;
+}
+combo SPECIAL {
+	set_val(LETHAL,100);  
+	set_val(TACTICAL,100);	
+	wait(100);
+	if (Fire_KS==TRUE)
+	combo_run (NO__FIRE_MOD);
+	wait(40);
+}  
+combo KILL {
+if (Fire_KS==TRUE)
+	combo_run (NO__FIRE_MOD);
+	wait (40);
+	set_val (SW_WEAPON, 100);
+	wait(400);
+	set_val (SW_WEAPON,0);
+	wait(40);
+}
+combo NO__FIRE_MOD {
+     fire__mods_ON=FALSE;
+     combo_run (BLINK_AR);
+     wait (30000);
+     fire__mods_ON=TRUE;
+     combo_stop (BLINK_AR);
+     }
+combo DROP_SHOT{
+	set_val(PRONE,100); 
+	wait(900);  
+}
+combo BLINK_AR {
+    wait(350);
+    set_rumble(RUMBLE_B, VIBRATION);    
+    color_led(Off);
+    wait(100);
+    reset_leds ();
+    reset_rumble ();
+}
+combo EASY_RUN {
+	set_val(SPRINT,100); 
+	wait(30);   
+	wait(100); 
+} 
+function RESET_Defaults () {
+RATE_OF_FIRE=10;
+rumble (1);
+}
+function save_pvars (){
+    set_pvar(SPVAR_1 , RATE_OF_FIRE); 
+rumble (1);
+}
+
+function Aim__Correction (Use_sens){
+  
+  if(get_val(FIRE) && get_val(ADS)) { 
+	Use_sens = ADS_FIRE_SENS;
+  }
+  if(get_val(FIRE) && !get_val(ADS)) { 
+	Use_sens = HIP_SENS;
+  }
+  if(!get_val(FIRE) && !get_val(ADS)) {
+	Use_sens = GEN_SENS;
+  }
+  if(!get_val(FIRE) && get_val(ADS)) {
+	Use_sens = ADS_SENS;
+  } 
+	sensitivity(9, NOT_USE,Use_sens);
+	sensitivity(10, NOT_USE,Use_sens);
+} 
+
+function turbo(btn) {
+    if (!turbo__trigger || !get_val(btn)) return; 
+    set_val(btn, 100);
+    }
+
+ function xy_val(f_axis,f_val) {
+	if(abs(get_val(f_axis)) < 25)
+	return f_val;
+	return get_val(f_axis);
+}
+function PLAY__LEDS (){
+	if(PrimaryWeapon) color_led (Blue); 
+	if (!PrimaryWeapon && R2F_K2S) color_led (Red);
+	if(PrimaryWeapon && RF_KS && autofire== 1) color_led (White);
+	if(PrimaryWeapon && RF_KS && autofire== 2) color_led (Yellow);
+	if(AKIMBO__AUTO_AIM && PrimaryWeapon) color_led(SkyBlue);
+	if(AKIMBO__AUTO_AIM && !PrimaryWeapon &&!R2F_K2S) color_led(Blue);
+	if(STICKY__AIM && get_val (ADS)) color_led(Pink);
+	if(AIM__CORRECT && get_val (FIRE)) color_led(Pink); 
+	if(RATE_OF_FIRE <2)color_led (Red);
+	if(RATE_OF_FIRE >24)color_led (Red);
+	}
+ //--1 = off, 2 = on
+function rumble(f_bln) {
+    if(f_bln)
+        rumble = 2;
+    else
+        rumble = 1;
+} 	
+
+function color_led(colour) {
+	set_led(LED_1, dbyte(colour * 4));
+	set_led(LED_2, dbyte((colour * 4) + 1));
+	set_led(LED_3, dbyte((colour * 4) + 2));
+	set_led(LED_4, dbyte((colour * 4) + 3));
+}

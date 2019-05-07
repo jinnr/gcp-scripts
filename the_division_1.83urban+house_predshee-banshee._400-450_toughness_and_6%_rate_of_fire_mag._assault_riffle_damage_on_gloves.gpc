@@ -1,0 +1,789 @@
+// GPC Online Library
+// the_division_1.83urban+house_predshee-banshee._400-450_toughness_and_6%_rate_of_fire_mag._assault_riffle_damage_on_gloves.gpc
+
+//Posted by noozbar, a member of the community in the CronusMAX Forums - https://cronusmax.com/forums
+
+//Posted : Wednesday 18th of July, 2018 12:37 UTC
+
+// Author: noozbar
+// v3.3
+
+// COLOR INDICATION:
+// BLUE = Script disable - Enable or Disable ALL features by holding D Pad DOWN and press PS4 Cross or Xbox A
+// GREEN = Primary weapon
+// RED = Secondary weapon
+// YELLOW = Pistol / Sidearm
+
+
+// / / / _ _ _ ____ ____ _ _ _ _ _ ____ / / /
+// / / / | | | |__| |__/ |\ | | |\ | | __ / / /
+// . . . |_|_| | | | \ | \| | | \| |__] . . .
+//-----------------------------------------------------------
+// It's up to you to change the TRUE / FALSE values in the "script settings" to set it for your way of playing.
+
+// Script acts on the keys of your controller, not on the game.
+// Script does not know what weapon you have in hand, you have to be careful that your weapon and the assigned color go together,
+// otherwise press "panic button" (D Pad UP).
+
+// Choose your primary and secondary weapons with TRUE / FALSE and go down set all the other options of the script.
+// For no assistance on your primary weapon, put all primary weapons on FALSE, so that you can play with any weapon normally,
+// without any assistance on that weapon while your secondary weapon has the pop shot you want with your SASG.
+
+// AntiRecoil has been adjusted with the In Game sensitivity options shown below.
+// If you have not the same settings In Game, your weapon may shoot to the sky or to the ground.
+// It will be necessary to adjust the recoils value.
+// Check FAQ for more informations. ( <a href="https://cronusmax.com/forums/showthread.php/176366-PS4-XBOX-The-Division-1-8-Many-usefull-scripts-F-A-Q-(updated-04-April)?p=1090390&viewfull=1#post1090390" target="_blank">https://cronusmax.com/forums/showthre...=1#post1090390</a> )
+
+// If your weapon shoot to the ground, discrease values.
+// If your weapon shoot to the sky, increase values.
+
+// Now enjoy
+
+
+// In Game settings (start > settings > controls):
+
+// 100% Camera Sensitivity
+
+// 90% Aim Sensitivity (IMPORTANT - 60% minimum)
+
+// 90% Scope Sensitivity
+
+// 0% Analog Dead Zone Size (VERY IMPORTANT!!!)
+
+// 0% Stability (no stability on your gear and weapon mods)(VERY IMPORTANT!!!) (start > inventory > character)
+
+// Press to sprint = OFF (recommended if AutoRun and Strafe are TRUE)
+
+// Invert Y Axis = Always OFF
+// If you play with inverted axis, go down in the settings of the script and set Axis_inverted = TRUE
+// In game option "Invert Y axis" MUST BE OFF!
+
+//______________________________________________________________________________________________________________________//
+//___________________________________________________OPTIONS START______________________________________________________//
+//______________________________________________________________________________________________________________________//
+// ____ _ _ ____ ____ ____ ____ _ _ ____ _ _ ____ ____ ___ ___ _ ____ _ _ ____
+// | |__| | | | | [__ |___ \_/ | | | | |__/ | | |__] | | | | |\ | [__
+// |___ | | |__| |__| ___] |___ | |__| |__| | \ |__| | | | |__| | \| ___]
+//----------------------------------------------------------------------------------------------------------------------//
+// PRIMARY WEAPON (or GREEN light):
+
+// Choose your primary weapon, only one value can be TRUE! (If no values are TRUE, you can play with any weapon)
+
+// Assault Rifle
+int LW_M4_onoff = FALSE;
+int BullFrog_onoff = FALSE;
+int MDR_onoff = TRUE;
+int WarlordAK_onoff = FALSE;
+int CaduceusSCARL_onoff = FALSE;
+
+//----------------------------------------------------------------------------------------------------------------------//
+// SECONDARY WEAPON (or RED light):
+
+// Choose your secondary weapon, only one value can be TRUE! (If no values are TRUE, you can play with any weapon)
+
+// SMG
+int House_2_onoff = TRUE; // Use with 5% or 6% Rate of Fire more !
+int MP5_2_onoff = FALSE; // Use with 5% or 6% Rate of Fire more !
+int Midas_2_onoff = FALSE; // Use with 5% or 6% Rate of Fire more !
+
+//----------------------------------------------------------------------------------------------------------------------//
+// Pistol setting (YELLOW light):
+// RapidFire for Pistol
+int RATE_OF_FIRE = 13; // Range: 1 to 25 RPS (Round/s)
+
+//----------------------------------------------------------------------------------------------------------------------//
+// AutoRun setting:
+
+// Work better when in game option "Press to Sprint" is turned OFF
+
+int AutoRun_onoff = FALSE; // TRUE = AutoTun ON // FALSE = AutoRun OFF
+
+//----------------------------------------------------------------------------------------------------------------------//
+// Parkour setting:
+
+// Hold D Pad DOWN and press PS4 Circle or Xbox B to activate, do it again to desactivate
+
+int Parkour_onoff = FALSE; // TRUE = Parkour ON // FALSE = Parkour OFF
+
+//----------------------------------------------------------------------------------------------------------------------//
+// Strafe setting:
+
+// Double tap PS4 Circle or Xbox B to Strafe, double tap again to stop Strafe
+// Work better when in game option "Press to Sprint" is turned OFF
+
+int Strafe_onoff =FALSE; // TRUE = Strafe ON // FALSE = Strafe OFF
+
+//----------------------------------------------------------------------------------------------------------------------//
+// Swap Triggers setting:
+
+int R1L1_onoff = FALSE; // FALSE = shoot and aim with R2/L2 // TRUE = shoot and aim with R1/L1
+
+//----------------------------------------------------------------------------------------------------------------------//
+// Inverted Axis setting:
+
+// If you play with inverted axis, set TRUE, in game option "Invert Y axis" MUST BE OFF!
+
+int Axis_inverted = FALSE; // Set TRUE for Right Y axis inverted, esle set FALSE
+
+//----------------------------------------------------------------------------------------------------------------------//
+// AutoMark/Mark Targets setting:
+
+int AutoMark_onoff = FALSE; // FALSE = AutoMark OFF // TRUE = AutoMark ON
+
+//----------------------------------------------------------------------------------------------------------------------//
+// Double Heal setting (Disable by befaut):
+
+// Hold D-Pad DOWN and press the button YOU assign just below to enable / disable
+// If enable, tap the button YOU assign just below to take MedKit then Heal Skill
+
+int Heal_BTN = R_SKILL; // set L_SKILL or R_SKILL
+
+//----------------------------------------------------------------------------------------------------------------------//
+// Fast MedKit setting:
+
+// Press PS4 Circle or Xbox B while aiming, fireing or both to take a medkit very fast
+
+int Fast_Medkit_onoff = TRUE; // TRUE = Fast Medkit ON // FALSE = Fast Medkit OFF
+
+//----------------------------------------------------------------------------------------------------------------------//
+// Fake Lone Star setting:
+
+// Double tap PS4 square or Xbox X to reload then switch weapon
+
+int Reload_Switch_onoff = TRUE; // TRUE = Fake Lone Star ON // FALSE = Fake Lone Star OFF
+
+//----------------------------------------------------------------------------------------------------------------------//
+// Classified 6p Striker (30% stability) settings:
+
+int Striker_onoff = FALSE; // TRUE if you run 6 pieces Striker, else FALSE
+
+//______________________________________________________________________________________________________________________//
+//___________________________________________________OPTIONS END________________________________________________________//
+//______________________________________________________________________________________________________________________//
+
+define R_SKILL = 3; // PS4 R1 / Xbox RB
+define FIRE_BTN = 4; // PS4 R2 / Xbox RT
+define R_Stick = 5; // PS4 R3 / Xbox RS
+define L_SKILL = 6; // PS4 L1 / Xbox LB
+define ADS_BTN = 7; // PS4 L2 / Xbox LT
+define L_Stick = 8; // PS4 L3 / Xbox LS
+define R_X = 9; // PS4 RX / Xbox RX
+define R_Y = 10; // PS4 RY / Xbox RY
+define L_X = 11; // PS4 LX / Xbox LX
+define L_Y = 12; // PS4 LY / Xbox LY
+define D_UP = 13; // PS4 UP / Xbox UP
+define D_DOWN = 14; // PS4 DOWN / Xbox DOWN
+define D_LEFT = 15; // PS4 LEFT / Xbox LEFT
+define D_RIGHT = 16; // PS4 RIGHT / Xbox RIGHT
+define Switch_button = 17; // PS4 Triangle / Xbox Y
+define CLIMB_BTN = 18; // PS4 Circle / Xbox B
+define COVER_BTN = 19; // PS4 Cross / Xbox A
+define RELOAD_BTN = 20; // PS4 Square / Xbox X
+
+define Blue = 1;
+define Red = 2;
+define Green = 3;
+define Pink = 4;
+define SkyBlue = 5;
+define Yellow = 6;
+define White = 7;
+
+data(1,
+2,0,0,0, //1. Blue
+0,2,0,0, //2. Red
+0,0,2,0, //3. Lime/Green
+0,0,0,2, //4. Fuchsia/Pink
+2,0,2,0, //5. SkyBlue
+0,2,2,0, //6. Yellow
+2,2,2,2 //7. White
+);
+
+int Script_onoff // For Enable/Disable ALL FEATURES (BLUE light if all features are disable)
+
+int ANTI_RECOIL; // For AntiRecoil combo
+int ANTI_RECOIL_LEFT; // For AntiRecoil combo
+int ANTI_RECOIL_RIGHT; // For AntiRecoil combo
+int AR_Release = 90; // For AntiRecoil combo
+int anti_recoil; // For AntiRecoil combo
+int anti_recoil_left; // For AntiRecoil combo
+int anti_recoil_right; // For AntiRecoil combo
+int BTN_Tap; // For Double Tap
+int Timer; // For Double Tap
+int Switch; // For Switch weapon
+int Pistol_onoff = FALSE; // For Sidearm / Pistol
+int hold_time; // For RapidFire
+int rest_time; // For RapidFire
+int Col_ind; // For CronusMAX color
+int Parkour; // For Parkour
+int Loop; // For Strafe
+int Heal_onoff; // For Double Heal
+int scoped; // For Snipers
+int S_Time1; // For Snipers
+int S_Time2; // For Snipers
+int AR_Time_1; // For MDR
+int AR_Time_2; // For MDR
+int SG_Time1; // For Shotgun combo
+int SG_Time2; // For Shotgun combo
+int SG_Time3; // For Shotgun combo
+
+//_______________________________________________________________________________________________________________________//
+// _ _ ____ _ _ _ ____ ___ ____ ____ ___
+// |\/| |__| | |\ | [__ | |__| |__/ |
+// | | | | | | \| ___] | | | | \ |
+
+main { // main start
+
+//Switch Weapons + Panic Button
+if(event_press(Switch_button) || event_release(D_UP) && get_ptime(D_UP) > 55) {Switch=!Switch; Pistol_onoff = FALSE;}
+//_______________________________________________________________________________________________________________________//
+
+// ____ ___ ___ _ ____ _ _ ____
+// | | |__] | | | | |\ | [__
+// |__| | | | |__| | \| ___]
+
+
+//Swap Triggers
+if(R1L1_onoff) {
+swap(3, 4); swap(6, 7);
+}
+
+//Script Enable/Disable mode (Script enable by defaut)
+//Hold D pad DOWN and press PS4 Cross or Xbox A to enable or disable ALL FEATURES BELOW
+if(get_val(D_DOWN) && event_press(COVER_BTN)) {
+Script_onoff=!Script_onoff;
+}
+
+if(!Script_onoff){ // Script Enable start
+
+//Double Tap
+if(Timer > 0) {
+Timer = Timer - get_rtime();
+if(Timer <= 0) BTN_Tap = FALSE;
+}
+
+//AutoRun (Work better when in game option "Press to Sprint" is turned OFF)
+if(AutoRun_onoff){
+if(!combo_running(Strafe_v2) && !get_val(ADS_BTN) && get_val(L_Y) < -75) { // Press sensitive = 75
+set_val(L_Stick, 100);
+}
+}
+
+//Parkour
+//If Parkour_onoff is TRUE, hold D pad DOWN and press PS4 Circle or Xbox B to enable, double tap again to disable
+if(Parkour_onoff){
+if(get_val(D_DOWN) && event_press(CLIMB_BTN)) {
+Parkour = !Parkour;
+}
+if(Parkour) {
+if(!combo_running(Strafe_v2) && !get_val(ADS_BTN) && get_val(L_Y) < -70) { // Press sensitive = 70
+combo_run(AutoClimb);
+}
+}
+}
+
+//Strafe
+//Double tap PS4 Circle or Xbox B to Strafe, double tap again to stop Strafe
+//Work better with AutoRun and when in game option "Press to Sprint" is turned OFF
+if(Strafe_onoff) {
+if(event_press(CLIMB_BTN)) {
+if(Double_Tap (175)) { // Double tap speed (discrease value to have to double tap faster to enable / disable)
+Loop = !Loop;
+}
+}
+if(Loop) {
+combo_run(Strafe_v2);
+}
+else{combo_stop(Strafe_v2);
+}
+}
+
+//Hair Trigger (always enable)
+if(get_val(FIRE_BTN) > 0){
+set_val(FIRE_BTN,100);
+}
+if(get_val(ADS_BTN) > 0){
+set_val(ADS_BTN,100);
+}
+
+//Inverted Axis
+if(Axis_inverted) {
+set_val(R_Y, inv(get_val(R_Y)));
+}
+
+// AutoMark (Mark Targets)
+if(AutoMark_onoff) {
+if(get_val(ADS_BTN)) {
+combo_run(MarkTargets);
+}
+}
+
+//Double Heal (Disable by befaut)
+//Hold D-Pad DOWN and press the button YOU assign in settings to enable / disable
+//If enable, tap the button YOU assign in settings to take MedKit then Heal Skill
+if(get_val(D_DOWN) && event_press(Heal_BTN)) {
+Heal_onoff=!Heal_onoff;
+}
+if(Heal_onoff) {
+if(event_press(Heal_BTN)) {
+set_val(Heal_BTN, 0);
+combo_run(Heal);
+}
+}
+
+//Fast MedKit
+//Take a MedKit very fast while aiming, fireing or both with PS4 Circle or Xbox B
+if(Fast_Medkit_onoff) {
+if((get_val(ADS_BTN) || get_val(FIRE_BTN)) && event_press(CLIMB_BTN)){
+combo_run(MedKit);
+}
+}
+
+//Fake Lone Star
+if(Reload_Switch_onoff) {
+if(event_press(RELOAD_BTN)) {
+if(Double_Tap (250)) { // Double tap speed (discrease value to have to double tap faster to reload then switch)
+combo_run(Reload);Switch=!Switch;
+}
+}
+}
+
+//_______________________________________________________________________________________________________________________//
+// ____ _ ___ ____ ____ ____ _ _ / ___ _ ____ ___ ____ _
+// [__ | | \ |___ |__| |__/ |\/| / |__] | [__ | | | |
+// ___] | |__/ |___ | | | \ | | / | | ___] | |__| |___ color blue
+
+// Switch to side arm
+if(event_press(Switch_button)) {
+if(Double_Tap (200)) { // Double tap speed (discrease value to have to double tap faster to switch to side arm)
+Pistol_onoff = TRUE ; Switch = !Switch;
+}
+}
+
+if(Pistol_onoff) { // Pistol start
+
+ANTI_RECOIL = 30; // Pistol AntiRecoil
+
+if(get_val(FIRE_BTN)){
+combo_run(AntiRecoil);combo_run(RAPID_FIRE);
+}
+else if(event_release(FIRE_BTN)) {
+combo_stop(AntiRecoil);combo_stop(RAPID_FIRE);
+}
+
+hold_time = 500 / RATE_OF_FIRE;
+rest_time = hold_time - 20;
+if(rest_time < 0) rest_time = 0;
+
+} // Pistol end
+
+//_______________________________________________________________________________________________________________________//
+if(!Pistol_onoff) { // NOT Pistol start
+//_______________________________________________________________________________________________________________________//
+
+if(!Switch) {
+// ___ ____ _ _ _ ____ ____ _ _ _ _ _ ____ ____ ___ ____ _ _
+// |__] |__/ | |\/| |__| |__/ \_/ | | | |___ |__| |__] | | |\ |
+// | | \ | | | | | | \ | |_|_| |___ | | | |__| | \| color green
+
+//----------------------------------------------------- All Assault Rifle -----------------------------------------------//
+
+if(LW_M4_onoff || BullFrog_onoff || MDR_onoff || WarlordAK_onoff || CaduceusSCARL_onoff) { // Any AR on
+if(get_val(FIRE_BTN)){
+ANTI_RECOIL = 0 ; combo_run(AntiRecoil);
+}
+else if(event_release(FIRE_BTN)) {
+combo_stop(AntiRecoil);combo_stop(MDR);
+}
+
+if(combo_running(AntiRecoil)){ // If antirecoil run on
+if(MDR_onoff) { // MDR on
+combo_run(MDR);
+} // MDR off
+} // If antirecoil run off
+
+} // Any AR off
+
+//----------------------------------------------------- LW M4 part ------------------------------------------------------//
+if(LW_M4_onoff){ // LWM4 TRUE start
+ANTI_RECOIL_LEFT = 0; // Change this value to compensate horizontal recoil (0 - 100)
+ANTI_RECOIL_RIGHT = 0; // Change this value to compensate horizontal recoil (0 - 100)
+
+if(get_val(FIRE_BTN)) {
+
+if(get_ptime(FIRE_BTN) >= 150) { // Burst before antirecoil
+Recoil (20, 12); // Recoil (NOT Striker value, Striker value)
+}
+
+if(get_ptime(FIRE_BTN) >= 650) { // +500
+Recoil (30, 17); // Recoil (NOT Striker value, Striker value)
+}
+
+if(get_ptime(FIRE_BTN) >= 1150) { // +500
+Recoil (40, 22); // Recoil (NOT Striker value, Striker value)
+}
+
+if(get_ptime(FIRE_BTN) >= 1900) { // +750
+Recoil (51, 28); // Recoil (NOT Striker value, Striker value)
+}
+
+if(get_ptime(FIRE_BTN) >= 2650) { // +750
+Recoil (63, 38); // Recoil (NOT Striker value, Striker value)
+}
+}
+} // LWM4 TRUE end
+
+
+//----------------------------------------------------- BullFrog part ---------------------------------------------------//
+if(BullFrog_onoff){ // BullFrog TRUE start
+ANTI_RECOIL_LEFT = 0; // Change this value to compensate horizontal recoil (0 - 100)
+ANTI_RECOIL_RIGHT = 0; // Change this value to compensate horizontal recoil (0 - 100)
+
+if(get_val(FIRE_BTN)) {
+
+if(get_ptime(FIRE_BTN) >= 150) { // Burst before antirecoil
+Recoil (22, 14); // Recoil (NOT Striker value, Striker value)
+}
+
+if(get_ptime(FIRE_BTN) >= 650) { // +500
+Recoil (33, 21); // Recoil (NOT Striker value, Striker value)
+}
+
+if(get_ptime(FIRE_BTN) >= 1150) { // +500
+Recoil (45, 28); // Recoil (NOT Striker value, Striker value)
+}
+
+if(get_ptime(FIRE_BTN) >= 1900) { // +750
+Recoil (59, 36); // Recoil (NOT Striker value, Striker value)
+}
+
+if(get_ptime(FIRE_BTN) >= 2650) { // +750
+Recoil (67, 46); // Recoil (NOT Striker value, Striker value)
+}
+}
+} // BullFrog TRUE end
+
+//----------------------------------------------------- MDR part --------------------------------------------------------//
+if(MDR_onoff) { // MDR TRUE start
+AR_Time_1 = 75; // Change this value if you add magazine with rate of fire
+AR_Time_2 = 107; // Change this value if you add magazine with rate of fire
+ANTI_RECOIL_LEFT = 0; // Change this value to compensate horizontal recoil (0 - 100)
+ANTI_RECOIL_RIGHT = 0; // Change this value to compensate horizontal recoil (0 - 100)
+
+Recoil (25, 16); // Recoil (NOT Striker value, Striker value)
+} // MDR TRUE end
+
+//----------------------------------------------------- Warlord / AK47 part ---------------------------------------------//
+if(WarlordAK_onoff){ // Warlord/AK47 TRUE start
+ANTI_RECOIL_LEFT = 5; // Change this value to compensate horizontal recoil (0 - 100)
+ANTI_RECOIL_RIGHT = 0; // Change this value to compensate horizontal recoil (0 - 100)
+
+if(get_val(FIRE_BTN)) {
+
+if(get_ptime(FIRE_BTN) >= 150) { // Burst before antirecoil
+Recoil (18, 14); // Recoil (NOT Striker value, Striker value)
+}
+
+if(get_ptime(FIRE_BTN) >= 800) { // +650
+Recoil (26, 16); // Recoil (NOT Striker value, Striker value)
+}
+
+if(get_ptime(FIRE_BTN) >= 1450) { // +650
+Recoil (35, 18); // Recoil (NOT Striker value, Striker value)
+}
+
+if(get_ptime(FIRE_BTN) >= 2400) { // +950
+Recoil (45, 21); // Recoil (NOT Striker value, Striker value)
+}
+
+if(get_ptime(FIRE_BTN) >= 3650) { // +1250
+Recoil (56, 27); // Recoil (NOT Striker value, Striker value)
+}
+}
+} // Warlord/AK47 TRUE end
+
+//----------------------------------------------------- Caduceus / SCAR L part ------------------------------------------//
+if(CaduceusSCARL_onoff){ // Caduceus/SCAR L TRUE start
+ANTI_RECOIL_LEFT = 0; // Change this value to compensate horizontal recoil (0 - 100)
+ANTI_RECOIL_RIGHT = 0; // Change this value to compensate horizontal recoil (0 - 100)
+
+if(get_val(FIRE_BTN)) {
+
+if(get_ptime(FIRE_BTN) >= 150) { // Burst before antirecoil
+Recoil (23, 15); // Recoil (NOT Striker value, Striker value)
+}
+
+if(get_ptime(FIRE_BTN) >= 800) { // +650
+Recoil (30, 17); // Recoil (NOT Striker value, Striker value)
+}
+
+if(get_ptime(FIRE_BTN) >= 1450) { // +650
+Recoil (39, 20); // Recoil (NOT Striker value, Striker value)
+}
+
+if(get_ptime(FIRE_BTN) >= 2400) { // +900
+Recoil (49, 24); // Recoil (NOT Striker value, Striker value)
+}
+
+if(get_ptime(FIRE_BTN) >= 3650) { // +1250
+Recoil (60, 32); // Recoil (NOT Striker value, Striker value)
+}
+}
+} // Caduceus/SCAR L TRUE end
+
+
+
+} //PRIMARY end
+
+//_______________________________________________________________________________________________________________________//
+
+if(Switch) {
+// ____ ____ ____ ____ _ _ ___ ____ ____ _ _ _ _ _ ____ ____ ___ ____ _ _
+// [__ |___ | | | |\ | | \ |__| |__/ \_/ | | | |___ |__| |__] | | |\ |
+// ___] |___ |___ |__| | \| |__/ | | | \ | |_|_| |___ | | | |__| | \| color red
+
+//----------------------------------------------------- All SMG ---------------------------------------------------------//
+
+if(House_2_onoff || MP5_2_onoff || Midas_2_onoff) { // Any SMG on
+if(get_val(FIRE_BTN)){
+ANTI_RECOIL = 0 ; combo_run(AntiRecoil);
+}
+else if(event_release(FIRE_BTN)) {
+combo_stop(AntiRecoil);
+}
+} // Any SMG off
+
+//----------------------------------------------------- House part ------------------------------------------------------//
+if(House_2_onoff){ // House TURE start
+ANTI_RECOIL_LEFT = 0; // Change this value to compensate horizontal recoil (0 - 100)
+ANTI_RECOIL_RIGHT = 0; // Change this value to compensate horizontal recoil (0 - 100)
+
+if(get_val(FIRE_BTN)) {
+
+if(get_ptime(FIRE_BTN) >= 150) { // Burst before antirecoil
+Recoil (14, 10); // Recoil (NOT Striker value, Striker value)
+}
+
+if(get_ptime(FIRE_BTN) >= 750) { // +600
+Recoil (24, 17); // Recoil (NOT Striker value, Striker value)
+}
+
+if(get_ptime(FIRE_BTN) >= 1350) { // +600
+Recoil (34, 24); // Recoil (NOT Striker value, Striker value)
+}
+
+if(get_ptime(FIRE_BTN) >= 2150) { // +800
+Recoil (46, 31); // Recoil (NOT Striker value, Striker value)
+}
+
+if(get_ptime(FIRE_BTN) >= 2950) { // +800
+Recoil (58, 39); // Recoil (NOT Striker value, Striker value)
+}
+}
+} // House TRUE end
+
+//----------------------------------------------------- MP5 part --------------------------------------------------------//
+if(MP5_2_onoff){ // MP5 TRUE start
+ANTI_RECOIL_LEFT = 0; // Change this value to compensate horizontal recoil (0 - 100)
+ANTI_RECOIL_RIGHT = 0; // Change this value to compensate horizontal recoil (0 - 100)
+
+if(get_val(FIRE_BTN)) {
+
+if(get_ptime(FIRE_BTN) >= 150) { // Burst before antirecoil
+Recoil (12, 7); // Recoil (NOT Striker value, Striker value)
+}
+
+if(get_ptime(FIRE_BTN) >= 1000) { // +850
+Recoil (22, 12); // Recoil (NOT Striker value, Striker value)
+}
+
+if(get_ptime(FIRE_BTN) >= 1850) { // +850
+Recoil (30, 19); // Recoil (NOT Striker value, Striker value)
+}
+
+if(get_ptime(FIRE_BTN) >= 2850) { // +1000
+Recoil (40, 26); // Recoil (NOT Striker value, Striker value)
+}
+
+if(get_ptime(FIRE_BTN) >= 3850) { // +1000
+Recoil (50, 32); // Recoil (NOT Striker value, Striker value)
+}
+}
+} // MP5 TRUE end
+
+//----------------------------------------------------- Midas part ------------------------------------------------------//
+if(Midas_2_onoff){ // Midas TURE start
+ANTI_RECOIL_LEFT = 0; // Change this value to compensate horizontal recoil (0 - 100)
+ANTI_RECOIL_RIGHT = 0; // Change this value to compensate horizontal recoil (0 - 100)
+
+if(get_val(FIRE_BTN)) {
+
+if(get_ptime(FIRE_BTN) >= 150) { // Burst before antirecoil
+Recoil (5, 5); // Recoil (NOT Striker value, Striker value)
+}
+
+if(get_ptime(FIRE_BTN) >= 1000) { // +850
+Recoil (12, 8); // Recoil (NOT Striker value, Striker value)
+}
+
+if(get_ptime(FIRE_BTN) >= 2000) { // +1000
+Recoil (17, 12); // Recoil (NOT Striker value, Striker value)
+}
+
+if(get_ptime(FIRE_BTN) >= 3000) { // +1000
+Recoil (22, 15); // Recoil (NOT Striker value, Striker value)
+}
+
+if(get_ptime(FIRE_BTN) >= 4250) { // +1250
+Recoil (28, 18); // Recoil (NOT Striker value, Striker value)
+}
+}
+} // Midas TRUE end
+
+} //SECONDARY end
+
+//_______________________________________________________________________________________________________________________//
+} // NOT Pistol end
+//_______________________________________________________________________________________________________________________//
+
+if(abs(get_val(R_Y)) > AR_Release || abs(get_val(R_X)) > 100) {
+combo_stop(AntiRecoil);
+}
+
+} // Script Enable end
+
+// COLOR INDICATION
+if(Script_onoff) colourled(Blue);
+else if(!Switch) colourled(Green);
+else colourled(Red);
+if(Pistol_onoff) colourled(Yellow);
+
+} //main end
+// _ _ ____ _ _ _ ____ _ _ ___
+// |\/| |__| | |\ | |___ |\ | | \
+// | | | | | | \| |___ | \| |__/
+//_______________________________________________________________________________________________________________________//
+// ____ ____ _ _ ___ ____ ____ ____ ____ ___ _ ____ _ _
+// | | | |\/| |__] | | [__ |___ | | | | | |\ |
+// |___ |__| | | |__] |__| ___] |___ |___ | | |__| | \|
+
+//----------------------------------------------------- Weapons combos -------------------------------------------------//
+
+combo RAPID_FIRE { // RAPIDFIRE FOR PISTOL
+set_val(FIRE_BTN, 100);
+wait(hold_time);
+set_val(FIRE_BTN, 0);
+wait(rest_time);
+set_val(FIRE_BTN, 0);
+}
+
+combo MDR { // RAPIDFIRE FOR MDR
+wait(AR_Time_1);
+set_val(FIRE_BTN, 0);
+wait(AR_Time_2);
+}
+
+//----------------------------------------------------- Features combos -------------------------------------------------//
+
+combo AutoClimb {
+set_val(CLIMB_BTN, 100);
+wait(500);
+wait(200);
+}
+
+combo Strafe_v2 { // Run straight, right, straight, left
+set_val(L_Y, -100);
+set_val(L_Stick, 100);
+wait(250); // Time to run straight
+set_val(L_X, 100);
+set_val(L_Y, 50);
+wait(750); // Time to run to the right
+set_val(L_Y, -100);
+set_val(L_Stick, 100);
+wait(250); // Time to run straight
+set_val(L_X, -100);
+set_val(L_Y, 50);
+wait(750); // Time to run to the left
+}
+
+combo MarkTargets {
+set_val(D_UP, 100);
+wait(50);
+set_val(D_UP, 0);
+wait(1000);
+}
+
+combo Heal {
+set_val(FIRE_BTN, 0);
+set_val(D_RIGHT, 100);
+wait(15);
+set_val(FIRE_BTN, 0);
+set_val(Heal_BTN, 100);
+wait(15);
+}
+
+combo MedKit {
+set_val(FIRE_BTN, 0);
+set_val(D_RIGHT, 100);
+wait(15);
+set_val(FIRE_BTN, 0);
+wait(15);
+}
+
+combo Reload {
+set_val(RELOAD_BTN,100);
+wait(15);
+set_val(Switch_button,0);
+wait(700);
+set_val(Switch_button,100);
+wait(15);
+}
+
+//_______________________________________________________________________________________________________________________//
+
+combo AntiRecoil {
+anti_recoil = get_val(R_Y) + ANTI_RECOIL;
+if(anti_recoil > 100) anti_recoil = 100;
+set_val(R_Y, anti_recoil);
+anti_recoil_left = get_val(R_X) - ANTI_RECOIL_LEFT;
+if(anti_recoil_left > 100) anti_recoil_left = 100;
+set_val(R_X, anti_recoil_left);
+anti_recoil_right = get_val(R_X) + ANTI_RECOIL_RIGHT;
+if(anti_recoil_right > 100) anti_recoil_right = 100;
+set_val(R_X, anti_recoil_right);
+}
+
+// ____ ____ _ _ ____ ___ _ ____ _ _ ____
+// |___ | | |\ | | | | | | |\ | [__
+// | |__| | \| |___ | | |__| | \| ___]
+//_______________________________________________________________________________________________________________________//
+
+function Recoil (val1, val2) {
+if(!Striker_onoff){
+ANTI_RECOIL = val1;
+}
+if(Striker_onoff){
+ANTI_RECOIL = val2;
+}
+}
+//_______________________________________________________________________________________________________________________//
+
+function Double_Tap (Time) {
+if(BTN_Tap){
+return TRUE;
+}
+
+BTN_Tap = TRUE;
+Timer = Time;
+return FALSE;
+
+}
+//_______________________________________________________________________________________________________________________//
+
+function colourled(Colour) { // COLOR LED function
+Col_ind=(Colour*4) - 3;
+set_led(LED_1,dbyte(Col_ind));
+set_led(LED_2,dbyte(Col_ind + 1));
+set_led(LED_3,dbyte(Col_ind + 2));
+set_led(LED_4,dbyte(Col_ind + 3));
+}
+//end

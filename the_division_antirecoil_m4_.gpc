@@ -1,0 +1,182 @@
+// GPC Online Library
+// the_division_antirecoil_m4_.gpc
+
+//Posted : Sunday 10th of September, 2017 17:32 UTC  
+ 
+ 
+ 
+// ANTIRECOIL + FIRST SHOT MULTIPLIER SWITCHABLE
+// RAPIDFIRE SWITCHABLE 
+ 
+//  Version: 2.1 - Classic
+//  Platform: Multi
+//  Controller: Multi
+//  Game: The Division
+//  Author: LEX LOST
+//------------------------------------------------------------------------------------------
+ 
+//  Colour led indications:
+//  Green:  antirecoil ON - rapidfire OFF
+//  Red: antirecoil OFF - rapidfire ON
+ 
+//------------------------------------------------------------------------------------------
+ 
+/* * 
+    How it works:
+    you can set a first antirecoil - called ANTI_FSM (I've set to 30: define ANTI_FSM = 30)
+    for a predefined amount of time (I've set to 1 second: define FSM_wait_time = 1000)
+    then the antirecoil will change to an higher value ( I've set to 50: define ANTI_RECOIL = 50)
+    just play with these numbers to find the correct antirecoil values (both) and the correct amount of time.
+    Don't forget that the value in 'define AR_Release' must be set at least 10 unit higher (or more) than 'define ANTI_RECOIL' value                           
+ 
+    INSTRUCTIONS:
+ 
+    ANTIRECOIL:
+    if you press TRIANGLE for more than 500 ms, antirecoil will be OFF; 
+    your controller will vibrate a little to warn you and the led will turn in RED (mod off) instead of GREEN (mod on)
+    quickly tap on TRIANGLE to restore antirecoil.
+ 
+    Hold L2 and press X to switch antirecoil on/off
+    Hold L2 and press Circle to switch Rapidfire on/off
+ 
+* */
+define ANTI_FSM          = 30;  // change this value to compensate vertical FSM (0 - 100) 
+define FSM_wait_time     = 1000;// change this value to set how long FSM will work (1000 = 1 second)
+ 
+define ANTI_RECOIL       = 50;  //Set this value to compensate for the recoil vertical (0 - 100) 
+define ANTI_RECOIL_LEFT  = 0;   //Set this value to compensate for the recoil left  (0 - 100)
+define ANTI_RECOIL_RIGHT = 0;   //Set this value to compensate for the recoil right (0 - 100) 
+ 
+define AR_Release    = 80; // change this value to determine when antirecoil stops working (min: antirecoil value + 10)   
+ 
+define RATE_OF_FIRE         =  6;   // Range: 1 to 25 RPS (Round/s)  
+define WEAPON_SWITCH_BUTTON = 17;
+ 
+define Blue      = 1; 
+define Red       = 2; 
+define Green     = 3; 
+define Pink      = 4; 
+define SkyBlue   = 5; 
+define Yellow    = 6; 
+define White     = 7; 
+ 
+data(1,// begin of data segment--------
+  2,0,0,0, //1. Blue
+  0,2,0,0, //2. Red
+  0,0,2,0, //3. Lime/Green
+  0,0,0,2, //4. Fuchsia/Pink
+  2,0,2,0, //5. SkyBlue
+  0,2,2,0, //6. Yellow
+  2,2,2,2  //7. White
+); // end of data segment--------------
+ 
+define FIRE_BTN      = 4;
+define ADS_BTN       = 7;                      
+define R_X           = 9;                              
+define R_Y           = 10;                              
+define L_X           = 11;                              
+define L_Y           = 12;                              
+ 
+int rf_onoff = TRUE;
+int ar_onoff = FALSE; 
+int anti_recoil;       
+int anti_recoil_left;  
+int anti_recoil_right;
+int hold_time, rest_time;
+int Col_ind;
+ 
+init {
+     hold_time = 500 / RATE_OF_FIRE;
+     rest_time = hold_time - 20;
+     if(rest_time < 0) rest_time = 0;
+} 
+ 
+main { 
+ 
+// RAPIDFIRE SWITCH (Hold L2/LT and press CROSS)
+   // ON/OFF mode
+    if(get_val(7)) { 
+        if(event_press(19)) {
+        combo_run(vibrate);rf_onoff=!rf_onoff; 
+        } 
+    }
+// RAPIDFIRE 
+    if(!rf_onoff) {
+        if(get_val(4)) {
+            combo_run(rapidfire);
+        }
+    } 
+// ANTIRECOIL SWITCH (Hold L2/LT and press CIRCLE)
+   // ON/OFF mode
+    if(get_val(7)) { 
+        if(event_press(18)) {
+        combo_run(vibrate); ar_onoff=!ar_onoff;
+        } 
+    }
+// ANTIRECOIL COLOR INDICATION
+     if(!ar_onoff) colourled(Green);
+     else colourled(Red); 
+ 
+// ANTIRECOIL
+   //  Mode ON 
+    if(event_press(WEAPON_SWITCH_BUTTON)) ar_onoff = FALSE;
+ 
+ 
+    if(!ar_onoff) {
+ 
+        if(event_press(FIRE_BTN) && get_val (7)){
+            combo_run(FSM);
+        }
+        if(get_val(FIRE_BTN) && get_val (7)){
+            if(!combo_running(FSM)){
+                combo_run(AntiRecoil);
+                }
+            }
+        }
+ 
+    if( abs(get_val(10)) > AR_Release || abs(get_val(9)) > AR_Release) { 
+        combo_stop (AntiRecoil); combo_stop (FSM);                 
+    }                                           
+}
+ 
+combo vibrate   {
+    set_rumble(RUMBLE_A, 100);
+    wait(200);
+    reset_rumble();
+    }  
+ 
+combo rapidfire {
+    set_val(4, 100);
+    wait(hold_time);
+    set_val(4, 0);
+    wait(rest_time);
+    set_val(4, 0);
+    }
+ 
+combo FSM{
+     set_val(10, ANTI_FSM);
+     wait(FSM_wait_time);
+     set_val(10, ANTI_RECOIL);
+    } 
+ 
+combo AntiRecoil {          
+     anti_recoil = get_val(R_Y) + ANTI_RECOIL; 
+     if(anti_recoil > 100) anti_recoil = 100;                
+     set_val(R_Y, anti_recoil);                         
+     anti_recoil_left = get_val(R_X) -ANTI_RECOIL_LEFT; 
+     if(anti_recoil_left > 100) anti_recoil_left = 100;      
+     set_val(R_X, anti_recoil_left);                    
+     anti_recoil_right = get_val(R_X) +ANTI_RECOIL_RIGHT; 
+     if(anti_recoil_right > 100) anti_recoil_right = 100;    
+     set_val(R_X, anti_recoil_right);                   
+    }
+ 
+// COLOR LED function
+//--------------------------------------------------------------
+function colourled(Colour) {
+    Col_ind=(Colour*4) - 3;
+    set_led(LED_1,dbyte(Col_ind  ));
+    set_led(LED_2,dbyte(Col_ind + 1));
+    set_led(LED_3,dbyte(Col_ind + 2));
+    set_led(LED_4,dbyte(Col_ind + 3));
+    }// end}
